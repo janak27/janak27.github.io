@@ -2,221 +2,366 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Janak Avhad</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" type="image/x-icon" href="./favicon_io/favicon.ico">
-  <link rel="shortcut icon" href="./favicon_io/favicon.ico">
-  <link rel="apple-touch-icon" href="./favicon_io/favicon-16x16.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janak Avhad | Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="./favicon_io/favicon.ico">
+    <link rel="shortcut icon" href="./favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" href="./favicon_io/favicon-16x16.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Geist Mono', monospace;
-    }
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    // Custom Colors (Approximation based on original CSS variables)
+                    colors: {
+                        'text-color': '#1a1a1a',
+                        'accent-color': '#4a4a4a',
+                        'subtext-color': '#666666',
+                        'link-color': '#000000',
+                    },
+                    // Custom Fonts
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // --font-main
+                        mono: ['JetBrains Mono', 'monospace'], // --font-mono
+                    },
+                    // Custom Spacing (Approximation based on --spacing-unit: 1.5rem;)
+                    spacing: {
+                        'spacing-unit': '1.5rem',
+                    },
+                    // Keyframes and Animation for Typewriter
+                    keyframes: {
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        },
+                        fadeIn: {
+                            'from': { opacity: '0', transform: 'translateY(10px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    },
+                    animation: {
+                        blink: 'blink 1s step-end infinite',
+                        fadeIn: 'fadeIn 0.8s ease forwards',
+                    },
+                }
+            }
+        }
+    </script>
 
-    section {
-      padding: 50px;
-    }
-  </style>
+    <style>
+        /* li::before replacement with custom content and positioning */
+        .item-list>li {
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .item-list>li::before {
+            content: "—";
+            /* Em dash style bullet */
+            position: absolute;
+            left: 0;
+            color: #ccc;
+        }
+
+        /* Stagger animations (Need to use custom selectors for nth-child delays) */
+        .fade-section:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .fade-section:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .fade-section:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .fade-section:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .fade-section:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        /* The custom cursor styling requires direct CSS for the animation */
+        .cursor-custom {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: #1a1a1a;
+            /* equivalent to var(--text-color) */
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+        }
+    </style>
 </head>
 
-<body class="text-black">
+<body class="bg-white text-text-color font-sans leading-relaxed text-base antialiased p-8 md:p-12">
 
-  <div class="md:w-1/2 w-full flex-col justify-center items-center mx-auto ">
+    <div class="max-w-[680px] mx-auto pb-16">
 
-    <section id="Main" class="  ">
-      <div class=" flex-col items-center justify-center">
-        <h2 class="text-3xl font-bold mb-4"> <a href="#Main"></a>Janak Avhad</h2>
-        <h6 class="text-sm font-bold mb-4"> mumbai, in</h6>
-        <p class="text-sm md:text-sm text-opacity-50 ">
-          <!-- Hi, I'm Janak Avhad — a Full-Stack Software Engineer from Mumbai, passionate about building scalable and
-          impactful products using Spring Boot, Angular, and AWS. At Tata Consultancy Services, I design and develop
-          robust end-to-end applications, focusing on performance, security, and cloud readiness. I bring a strong track
-          record in full-stack development along with hands-on experience in Oracle HFM, PL/SQL, and ETL automation,
-          enabling data-accurate financial reporting and optimized enterprise workflows. I thrive on solving complex
-          engineering challenges and delivering real-world solutions through collaboration and clean architecture. -->
-          Hi, I'm Janak Avhad, a software engineer passionate about building clean, scalable full-stack apps. I write about Software's , products, tech and life learnings.
-        </p>
-        <div class="my-4 flex justify-left gap-4 flex-wrap">
-          <a href="#work"
-            class="px-2 py-1 text-sm md:px-6 md:py-2 md:text-lg  font-semibold hover:bg-black hover:text-white">Work</a>
-          <a href="#projects"
-            class="px-2 py-1 text-sm md:px-6 md:py-2 md:text-lg  font-semibold hover:bg-black hover:text-white">Projects</a>
-          <a href="#blogs"
-            class="px-2 py-1 text-sm md:px-6 md:py-2 md:text-lg  font-semibold hover:bg-black hover:text-white">Blogs</a>
-          <a href="#contact"
-            class="px-2 py-1 text-sm md:px-6 md:py-2 md:text-lg  font-semibold hover:bg-black hover:text-white">Contact</a>
-        </div>
-      </div>
-          <hr class="h-px bg-gray-200 border-0 dark:bg-gray-700">
-    </section>
+        <header class="mb-12 pb-4 border-b border-gray-200">
 
-
-    <section id="work" class="-mt-16">
-      <div class=" flex-col items-center justify-center">
-        <h2 class="text-3xl font-bold mb-4">Work experience</h2>
-        <div class="grid grid-cols-1 grid-cols-1 gap-8 text-sm md:text-lg">
-          <!-- Project 1 -->
-          <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h3 class=" md:text-2xl text-lg font-semibold text-white mb-2"> Tata Consultancy Services</h3>
-            <div class="flex justify-between">
-              <h6 class="text-sm font-bold mb-4 text-white"> Assistant System Engineer</h6>
-              <h6 class="text-sm font-bold mb-4 text-white"> Nov 2023 - present</h6>
-            </div>
-            <p class="text-gray-400 mb-4 text-sm ">At Tata Consultancy Services, I integrated financial data using
-              Oracle HFM and FDMEE with 100% accuracy. I automated reconciliation processes, reducing errors by 30% and
-              saving 20+ hours per cycle. Additionally, I optimized PL/SQL ETL scripts, automated HFM data loads, and
-              developed SmartView reports, improving financial analysis and efficiency.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section id="projects" class="-mt-16">
-      <div class=" flex-col items-center justify-center">
-        <h2 class="text-3xl font-bold mb-4">My Projects</h2>
-        <p class="text-sm md:text-lg text-opacity-50 mb-4">Here are some of the projects I have worked on:
-        </p>
-
-        <div class="container mx-auto grid grid-cols-1 grid-cols-1 gap-8 text-sm md:text-lg ">
-          <!-- Project 1 -->
-          <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h3 class=" md:text-2xl text-lg font-semibold text-white mb-2"> PlaceIt: Placement Integration System</h3>
-            <p class="text-gray-400 mb-4 text-sm"> Developed a Placement Integration System to streamline data
-              management and
-              optimize the placement process for colleges. Created user-friendly dashboards for real-time student data
-              visualization, reducing reliance on spreadsheets with automated data handling.</p>
-            <a href="https://github.com/Place-IT" target="_blank" class="text-blue-400 hover:underline">View on
-              GitHub</a>
-          </div>
-
-          <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h3 class=" md:text-2xl text-lg font-semibold text-white mb-2"> QuoteMint: Blockchain-based Microblogging
-              Web-App</h3>
-            <p class="text-gray-400 mb-4 text-sm"> Developed a decentralized microblogging platform with
-              blockchain-backed
-              content authenticity and Solidity smart contracts for data immutability. Integrated NFT support for
-              digital asset creation, boosting user engagement</p>
-            <a href="https://github.com/janak27/QuoteMint" target="_blank" class="text-blue-400 hover:underline">View on
-              GitHub</a>
-          </div>
-
-          <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h3 class=" md:text-2xl text-lg font-semibold text-white mb-2"> ShortSnips - DSA revising code snippets</h3>
-            <p class="text-gray-400 mb-4 text-sm"> This open-source project provides a one-stop solution for studying
-              and
-              revising Data Structures and Algorithms concepts. Students can contribute by opening issues for missing
-              snippets or adding new ones to help others.</p>
-            <a href="https://github.com/Short-Snips/Snips_contribution" target="_blank"
-              class="text-blue-400 hover:underline">View on GitHub</a>
-          </div>
-
-          <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h3 class=" md:text-2xl text-lg font-semibold text-white mb-2"> GeeksforGreen: E-commerce Website Template
+            <h1 class="font-mono text-2xl font-medium min-h-[2em] flex items-center mb-2">
+                Janak Avhad
+            </h1>
+            <h3 class="font-mono text-md font-medium min-h-[2em] flex items-center mb-2">
+                <span id="typewriter-text"></span>
+                <span class="cursor-custom"></span>
             </h3>
-            <p class="text-gray-400 mb-4 text-sm"> GeeksforGreen is an innovative e-commerce website template built with
-              Django,
-              offering seamless payment integration, secure authentication, and intuitive dashboards. It provides a
-              comprehensive solution for building modern, functional online stores with ease.</p>
-            <a href="https://github.com/janak27/geeksforgreens" target="_blank"
-              class="text-blue-400 hover:underline">View on GitHub</a>
-          </div>
 
-          <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-            <h3 class=" md:text-2xl text-lg font-semibold text-white mb-2"> ReactGym: Exercise Routine and
-              Recommendation System</h3>
-            <p class="text-gray-400 mb-4 text-sm"> ReactGym is an exercise routine and recommendation system built with
-              React
-              and powered by Postman APIs. It provides personalized workout plans and exercise suggestions based on
-              individual fitness goals, creating a seamless and interactive user experience.</p>
-            <a href="https://github.com/janak27/gym-react" target="_blank" class="text-blue-400 hover:underline">View on
-              GitHub</a>
-          </div>
+            <div class="flex gap-4 text-sm mt-4">
+                <a href="https://github.com/janak27"
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color flex items-center gap-1.5">
+                    <i class="fab fa-github"></i> Github
+                </a>
+                <a href="https://www.linkedin.com/in/janak-avhad/"
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color flex items-center gap-1.5">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="mailto:avhadjanak@gmail.com"
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color flex items-center gap-1.5">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="tel:+91-9372281138"
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color flex items-center gap-1.5">
+                    <i class="fas fa-phone"></i> Call
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
+                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Objective
+                </h2>
+                <p class="text-[0.95rem] text-accent-color">
+                    Reliable Software Engineer with 2+ years of experience specializing in enterprise-grade backend
+                    financial systems (Java, Python, Spring Boot, AWS, Oracle HFM). Proven ability to deliver scalable
+                    solutions and automation workflows that significantly enhance performance and global operations.
+                    Actively researching AI agents for intelligent automation to build efficient and future-ready
+                    software.
+                </p>
+            </section>
+
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
+                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Experience
+                </h2>
+
+                <div class="mb-8">
+                    <div
+                        class="flex justify-between items-baseline flex-wrap mb-1 md:flex-row md:gap-0 flex-col gap-0.5">
+                        <span class="font-semibold text-base">Software Engineer</span>
+                        <span class="font-mono text-xs text-subtext-color">Nov 2023 - Present</span>
+                    </div>
+                    <div class="text-[0.95rem] text-accent-color">Tata Consultancy Services (TCS) | Nagpur, India
+                    </div>
+                    <div class="text-[0.95rem] text-accent-color mt-1">
+                        <span class="font-mono text-xs text-subtext-color block">Project: Oracle HFM-Based Enterprise
+                            Applications for Global Finance Client</span>
+                    </div>
+                    <div class="text-[0.95rem] text-accent-color">
+                        <ul class="list-none mt-2.5 space-y-1 item-list">
+                            <li>Designed and deployed automation workflows using <ins>Java, Python, and FDMEE</ins> for
+                                HFM, <ins>optimizing the month-end close process and reducing manual effort by over
+                                    40%</ins>.</li>
+                            <li>Developed and maintained core HFM applications, including metadata, business rules
+                                (VBScript), and data journals, ensuring accurate and scalable global financial
+                                consolidation.</li>
+                            <li>Engineered and optimized <ins>FDMEE mappings</ins>, transformation logic, and
+                                PL/SQL-based rules for automated data extraction and loading, ensuring seamless and
+                                accurate integration with Oracle DB.</li>
+                            <li>Created dynamic financial reports and dashboards using Smart View and Excel Macros to
+                                provide business users with real-time financial insights.</li>
+                            <li>Collaborated with global Finance, IT, and Audit teams to build high-performance,
+                                auditable financial systems, focusing on data validation, reconciliation, and
+                                compliance.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
+                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Projects</h2>
+
+                <div class="mb-8">
+                    <div class="flex justify-between items-baseline flex-wrap mb-1">
+                        <a href="https://github.com/Place-IT" target="_blank"
+                            class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300">
+                            PlaceIt: Placement Integration System
+                        </a>
+                    </div>
+                    <div class="text-[0.95rem] text-accent-color mt-1">
+                        <span class="font-mono text-xs text-subtext-color block"> React, Tailwindcss Django, Neo4jDB,
+                            AWS, Jenkins</span>
+                    </div>
+                    <div class="text-[0.95rem] text-accent-color">
+                        <ul class="list-none mt-2.5 space-y-1 item-list">
+                            <li>Developed a Placement Integration System to streamline data management and optimize the
+                                placement process for colleges.</li>
+                            <li>Created user-friendly dashboards for <ins>real-time student data visualization</ins>,
+                                reducing reliance on spreadsheets with <ins>automated data handling</ins>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <div class="flex justify-between items-baseline flex-wrap mb-1">
+                        <a href="https://github.com/Short-Snips/Snips_contribution" target="_blank"
+                            class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300">
+                            ShortSnips - DSA Revising Code Snippets
+                        </a>
+                    </div>
+                    <div class="text-[0.95rem] text-accent-color mt-1">
+                        <span class="font-mono text-xs text-subtext-color block">React, Django, Neo4jDB, GCP</span>
+                    </div>
+                    <div class="text-[0.95rem] text-accent-color">
+                        <ul class="list-none mt-2.5 space-y-1 item-list">
+                            <li>An open-source project providing a one-stop solution for studying and revising <ins>Data
+                                    Structures and Algorithms</ins> (DSA) concepts.</li>
+                            <li>Designed for community contribution, allowing students to add new code snippets and
+                                collaborate on missing concepts.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
+                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Education
+                </h2>
+
+                <div class="mb-8">
+                    <div
+                        class="flex justify-between items-baseline flex-wrap mb-1 md:flex-row md:gap-0 flex-col gap-0.5">
+                        <span class="font-semibold text-base">Bharati Vidyapeeth College of Engineering, Navi
+                            Mumbai</span>
+                        <span class="font-mono text-xs text-subtext-color">Aug 2019 - Jun 2023</span>
+                    </div>
+                    <div class="text-[0.95rem] text-accent-color italic">Bachelor of Engineering - BE in Information
+                        Technology | Grade: 9.02</div>
+                    <div class="font-mono text-xs text-subtext-color">Navi Mumbai, India</div>
+                </div>
+            </section>
+
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
+                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Skills</h2>
+
+                <div class="mb-4"> <strong class="block mb-2 text-sm font-semibold">Technical Skills (Full-Stack &
+                        Enterprise)</strong>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Java</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Python</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Spring
+                            Boot</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Oracle HFM /
+                            FDMEE</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">PL/SQL</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">TypeScript</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">React</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Node.js</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">AWS</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Docker</span>
+
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Git/GitHub</span>
+                    </div>
+                </div>
+
+                <div class="mb-4"> <strong class="block mb-2 text-sm font-semibold">Data, AI & Foundational
+                        Concepts</strong>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">AI
+                            Agents</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Data Structures
+                            & Algorithms</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Databases</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Networks</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">System
+                            Design</span>
 
 
-        </div>
-      </div>
-    </section>
 
+                    </div>
+                </div>
 
-    <!-- Blogs Section -->
-    <section id="blogs" class=" -mt-16">
-      <h2 class="text-3xl font-bold mb-4">Blogs</h2>
+                <div class="mb-4">
+                    <strong class="block mb-2 text-sm font-semibold">Soft Skills</strong>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Problem
+                            Solving</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Communication</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Collaboration</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Curiosity &
+                            Growth</span>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-      <div class="container mx-auto grid grid-cols-1 grid-cols-1 gap-8 text-sm md:text-lg ">
+        <footer class="mt-16 pt-4 border-t border-gray-200 text-center">
+            <p class="font-mono text-xs text-subtext-color">
+                Created by Janak Avhad © 2025
+            </p>
+        </footer>
+    </div>
 
-        <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-          <h3 class=" md:text-2xl text-lg font-semibold text-white mb-2">Tailwind CSS New Features: What You Need to
-            Know
-          </h3>
-          <a href="https://medium.com/@avhadjanak/tailwind-css-new-features-what-you-need-to-know-e721076edad8"
-            target="_blank" class="text-blue-400 hover:underline">View on Medium</a>
-        </div>
+    <script>
+        // Typewriter Effect Configuration (JavaScript remains the same)
+        const phrases = [
+            "Software Engineer",
+            "Full-Stack Developer",
+            "AI & LLM Enthusiast",
+            "Avid Reader"
+        ];
 
-        <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-          <h3 class=" md:text-2xl text-lg font-semibold text-white mb-2">Implementing JWT Token-Based Security in Spring Boot 3.X Applications
-          </h3>
-          <a href="https://medium.com/@avhadjanak/implementing-jwt-token-based-security-in-spring-boot-3-applications-b01265675935"
-            target="_blank" class="text-blue-400 hover:underline">View on Medium</a>
-        </div>
+        const el = document.getElementById("typewriter-text");
+        let sleepTime = 100;
+        let curPhraseIndex = 0;
 
-      </div>
+        const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        const writeLoop = async () => {
+            while (true) {
+                let curWord = phrases[curPhraseIndex];
 
+                // Typing
+                for (let i = 0; i < curWord.length; i++) {
+                    el.innerText = curWord.substring(0, i + 1);
+                    await sleep(sleepTime);
+                }
 
-    </section>
+                await sleep(2000); // Wait after typing complete
 
+                // Deleting
+                for (let i = curWord.length; i > 0; i--) {
+                    el.innerText = curWord.substring(0, i - 1);
+                    await sleep(sleepTime / 2); // Delete faster
+                }
 
-    <section id="contact" class=" -mt-16">
-      <h2 class="text-3xl font-bold mb-4">Contact</h2>
-      <p class="text-sm md:text-lg  text-opacity-100">
-        Here is my <a class="underline" target="_blank"
-          href="https://drive.google.com/file/d/1Pk6XU3rn6vJI1WMY-3OG_5sAGBXxMQ8k/view?usp=sharing">resume,</a>
-      <p class="text-sm md:text-lg text-opacity-100 my-4"> feel free to contact me on </p>
-      <ul class="max-w-md space-y-1  list-none list-inside underline">
-        <li>
-          <a href="https://x.com/JanakAvhad" target="_blank"> 𝕏/JanakAvhad</a>
-        </li>
-        <li>
-          <a href="https://github.com/janak27" target="_blank"><i class="fab fa-github"></i>/janak27</a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/janak-avhad/" target="_blank"><i
-              class="fab fa-linkedin"></i>/janak-avhad</a>
-        </li>
-        <li>
-          <a href="https://medium.com/@avhadjanak" target="_blank"><i class="fa-brands fa-medium"></i>/avhadjanak</a>
-        </li>
-        <li style="display: flex; align-items: center;">
-          <a href="https://leetcode.com/u/avhadjanak/" target="_blank" style="display: flex; align-items: center;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" alt="LeetCode"
-              style="height: 16px; margin-right: 5px;">
-            /avhadjanak
-          </a>
-        </li>
+                await sleep(500); // Wait before typing next
 
-        <li>
-          <a href="mailto:avhadjanak@gmail.com"><i class="fa fa-envelope"></i>/avhadjanak@gmail.com</a>
-        </li>
-      </ul>
-      </p>
+                // Switch to next phrase
+                if (curPhraseIndex === phrases.length - 1) {
+                    curPhraseIndex = 0;
+                } else {
+                    curPhraseIndex++;
+                }
+            }
+        };
+        writeLoop();
+    </script>
 
-
-      <p class="text-sm md:text-lg underline text-opacity-50 my-8">
-        This site is build on a single file, inspired by <a class="underline" target="_blank"
-          href="https://karpathy.ai/">Sensai</a>
-      </p>
-
-      <p class="text-sm md:text-lg text-center text-opacity-50 my-8">
-        Created by Janak Avhad @2025
-      </p>
-    </section>
-  </div>
 </body>
 
 </html>
