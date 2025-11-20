@@ -17,15 +17,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
+        // Set Tailwind Config to use 'class' for dark mode
         tailwind.config = {
+            darkMode: 'class', // <--- IMPORTANT: Enables class-based dark mode
             theme: {
                 extend: {
                     // Custom Colors (Approximation based on original CSS variables)
                     colors: {
-                        'text-color': '#1a1a1a',
-                        'accent-color': '#4a4a4a',
-                        'subtext-color': '#666666',
-                        'link-color': '#000000',
+                        'text-color': '#1a1a1a', // Light mode primary text
+                        'accent-color': '#4a4a4a', // Light mode secondary text
+                        'subtext-color': '#666666', // Light mode tertiary/mono text
+                        'link-color': '#000000', // Light mode link color
+                        // We will rely on default Tailwind colors (black, white, gray-400, gray-900) for dark mode contrast
                     },
                     // Custom Fonts
                     fontFamily: {
@@ -57,6 +60,13 @@
     </script>
 
     <style>
+        /* Dark Mode Specific Styles */
+        /* Set body to true black background when 'dark' class is present on html */
+        html.dark body {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
         /* li::before replacement with custom content and positioning */
         .item-list>li {
             position: relative;
@@ -69,6 +79,12 @@
             position: absolute;
             left: 0;
             color: #ccc;
+            /* Light gray in light mode */
+        }
+
+        /* Dark mode adjustment for the bullet point (make it visible but subtle) */
+        html.dark .item-list>li::before {
+            color: #4b5563; /* Darker gray in dark mode */
         }
 
         /* Stagger animations (Need to use custom selectors for nth-child delays) */
@@ -98,18 +114,27 @@
             width: 8px;
             height: 1.2em;
             background-color: #1a1a1a;
-            /* equivalent to var(--text-color) */
+            /* Light mode color */
             margin-left: 4px;
             animation: blink 1s step-end infinite;
+        }
+
+        /* Dark mode adjustment for the cursor (true white) */
+        html.dark .cursor-custom {
+            background-color: #ffffff;
         }
     </style>
 </head>
 
-<body class="bg-white text-text-color font-sans leading-relaxed text-base antialiased p-8 md:p-12">
-
+<body
+    class="bg-white text-text-color font-sans leading-relaxed text-base antialiased p-8 md:p-12 transition-colors duration-300 dark:bg-black dark:text-white">
     <div class="max-w-[680px] mx-auto pb-16">
 
-        <header class="mb-12 pb-4 border-b border-gray-200">
+        <header class="mb-12 pb-4 border-b border-gray-200 dark:border-gray-800 relative">
+            <button id="theme-toggle"
+                class="absolute top-0 right-0 p-1 text-subtext-color dark:text-gray-400 hover:text-link-color dark:hover:text-white transition-colors duration-300 focus:outline-none">
+                <i id="theme-icon" class="fas fa-sun"></i>
+            </button>
 
             <h1 class="font-mono text-2xl font-medium min-h-[2em] flex items-center mb-2">
                 Janak Avhad
@@ -119,31 +144,37 @@
                 <span class="cursor-custom"></span>
             </h3>
 
-            <div class="flex gap-4 text-sm mt-4">
+            <div class="flex gap-8 text-sm mt-4">
                 <a href="https://github.com/janak27"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color flex items-center gap-1.5">
-                    <i class="fab fa-github"></i> Github
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
+                    <i class="fab fa-github"></i>
                 </a>
                 <a href="https://www.linkedin.com/in/janak-avhad/"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color flex items-center gap-1.5">
-                    <i class="fab fa-linkedin"></i> LinkedIn
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
+                    <i class="fab fa-linkedin"></i>
                 </a>
                 <a href="mailto:avhadjanak@gmail.com"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color flex items-center gap-1.5">
-                    <i class="fas fa-envelope"></i> Email
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
+                    <i class="fas fa-envelope"></i>
                 </a>
                 <a href="tel:+91-9372281138"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color flex items-center gap-1.5">
-                    <i class="fas fa-phone"></i> Call
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="YOUR_LEETCODE_PROFILE_URL"
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
+                    <i class="fas fa-code"></i>
                 </a>
             </div>
         </header>
 
         <main>
             <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Objective
+                <h2
+                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+                    Objective
                 </h2>
-                <p class="text-[0.95rem] text-accent-color">
+                <p class="text-[0.95rem] text-accent-color dark:text-gray-300">
                     Reliable Software Engineer with 2+ years of experience specializing in enterprise-grade backend
                     financial systems (Java, Python, Spring Boot, AWS, Oracle HFM). Proven ability to deliver scalable
                     solutions and automation workflows that significantly enhance performance and global operations.
@@ -153,22 +184,24 @@
             </section>
 
             <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Experience
+                <h2
+                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+                    Experience
                 </h2>
 
                 <div class="mb-8">
                     <div
                         class="flex justify-between items-baseline flex-wrap mb-1 md:flex-row md:gap-0 flex-col gap-0.5">
                         <span class="font-semibold text-base">Software Engineer</span>
-                        <span class="font-mono text-xs text-subtext-color">Nov 2023 - Present</span>
+                        <span class="font-mono text-xs text-subtext-color dark:text-gray-400">Nov 2023 - Present</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color">Tata Consultancy Services (TCS) | Nagpur, India
+                    <div class="text-[0.95rem] text-accent-color dark:text-gray-300">Tata Consultancy Services (TCS) | Nagpur, India
                     </div>
                     <div class="text-[0.95rem] text-accent-color mt-1">
-                        <span class="font-mono text-xs text-subtext-color block">Project: Oracle HFM-Based Enterprise
+                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">Project: Oracle HFM-Based Enterprise
                             Applications for Global Finance Client</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color">
+                    <div class="text-[0.95rem] text-accent-color dark:text-gray-300">
                         <ul class="list-none mt-2.5 space-y-1 item-list">
                             <li>Designed and deployed automation workflows using <ins>Java, Python, and FDMEE</ins> for
                                 HFM, <ins>optimizing the month-end close process and reducing manual effort by over
@@ -190,20 +223,22 @@
             </section>
 
             <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Projects</h2>
+                <h2
+                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+                    Projects</h2>
 
                 <div class="mb-8">
                     <div class="flex justify-between items-baseline flex-wrap mb-1">
                         <a href="https://github.com/Place-IT" target="_blank"
-                            class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300">
+                            class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300 dark:hover:text-white dark:decoration-gray-700">
                             PlaceIt: Placement Integration System
                         </a>
                     </div>
                     <div class="text-[0.95rem] text-accent-color mt-1">
-                        <span class="font-mono text-xs text-subtext-color block"> React, Tailwindcss Django, Neo4jDB,
+                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400"> React, Tailwindcss Django, Neo4jDB,
                             AWS, Jenkins</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color">
+                    <div class="text-[0.95rem] text-accent-color dark:text-gray-300">
                         <ul class="list-none mt-2.5 space-y-1 item-list">
                             <li>Developed a Placement Integration System to streamline data management and optimize the
                                 placement process for colleges.</li>
@@ -216,14 +251,14 @@
                 <div class="mb-8">
                     <div class="flex justify-between items-baseline flex-wrap mb-1">
                         <a href="https://github.com/Short-Snips/Snips_contribution" target="_blank"
-                            class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300">
+                            class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300 dark:hover:text-white dark:decoration-gray-700">
                             ShortSnips - DSA Revising Code Snippets
                         </a>
                     </div>
                     <div class="text-[0.95rem] text-accent-color mt-1">
-                        <span class="font-mono text-xs text-subtext-color block">React, Django, Neo4jDB, GCP</span>
+                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">React, Django, Neo4jDB, GCP</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color">
+                    <div class="text-[0.95rem] text-accent-color dark:text-gray-300">
                         <ul class="list-none mt-2.5 space-y-1 item-list">
                             <li>An open-source project providing a one-stop solution for studying and revising <ins>Data
                                     Structures and Algorithms</ins> (DSA) concepts.</li>
@@ -235,7 +270,9 @@
             </section>
 
             <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Education
+                <h2
+                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+                    Education
                 </h2>
 
                 <div class="mb-8">
@@ -243,82 +280,116 @@
                         class="flex justify-between items-baseline flex-wrap mb-1 md:flex-row md:gap-0 flex-col gap-0.5">
                         <span class="font-semibold text-base">Bharati Vidyapeeth College of Engineering, Navi
                             Mumbai</span>
-                        <span class="font-mono text-xs text-subtext-color">Aug 2019 - Jun 2023</span>
+                        <span class="font-mono text-xs text-subtext-color dark:text-gray-400">Aug 2019 - Jun 2023</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color italic">Bachelor of Engineering - BE in Information
+                    <div class="text-[0.95rem] text-accent-color italic dark:text-gray-300">Bachelor of Engineering - BE in Information
                         Technology | Grade: 9.02</div>
-                    <div class="font-mono text-xs text-subtext-color">Navi Mumbai, India</div>
+                    <div class="font-mono text-xs text-subtext-color dark:text-gray-400">Navi Mumbai, India</div>
                 </div>
             </section>
 
             <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2 class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium">Skills</h2>
+                <h2
+                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+                    Skills</h2>
 
                 <div class="mb-4"> <strong class="block mb-2 text-sm font-semibold">Technical Skills (Full-Stack &
                         Enterprise)</strong>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Java</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Python</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Spring
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Java</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Python</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Spring
                             Boot</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Oracle HFM /
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Oracle HFM /
                             FDMEE</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">PL/SQL</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">PL/SQL</span>
                         <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">TypeScript</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">React</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Node.js</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">AWS</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Docker</span>
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">TypeScript</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">React</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Node.js</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">AWS</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Docker</span>
 
                         <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Git/GitHub</span>
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Git/GitHub</span>
                     </div>
                 </div>
 
                 <div class="mb-4"> <strong class="block mb-2 text-sm font-semibold">Data, AI & Foundational
                         Concepts</strong>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">AI
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">AI
                             Agents</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Data Structures
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Data Structures
                             & Algorithms</span>
                         <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Databases</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Networks</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">System
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Databases</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Networks</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">System
                             Design</span>
-
-
-
                     </div>
                 </div>
 
                 <div class="mb-4">
                     <strong class="block mb-2 text-sm font-semibold">Soft Skills</strong>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Problem
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Problem
                             Solving</span>
                         <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Communication</span>
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Communication</span>
                         <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Collaboration</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono">Curiosity &
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Collaboration</span>
+                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Curiosity &
                             Growth</span>
                     </div>
                 </div>
             </section>
         </main>
 
-        <footer class="mt-16 pt-4 border-t border-gray-200 text-center">
-            <p class="font-mono text-xs text-subtext-color">
+        <footer class="mt-16 pt-4 border-t border-gray-200 text-center dark:border-gray-800">
+            <p class="font-mono text-xs text-subtext-color dark:text-gray-400">
                 Created by Janak Avhad © 2025
             </p>
         </footer>
     </div>
 
     <script>
-        // Typewriter Effect Configuration (JavaScript remains the same)
+        // --- Dark Mode Logic ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Check for saved theme preference or system preference
+        function applyTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                htmlElement.classList.add('dark');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // Apply theme on load
+        applyTheme();
+
+
+        // --- Typewriter Effect Logic ---
         const phrases = [
             "Software Engineer",
             "Full-Stack Developer",
