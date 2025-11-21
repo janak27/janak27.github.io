@@ -22,32 +22,37 @@
             darkMode: 'class', // <--- IMPORTANT: Enables class-based dark mode
             theme: {
                 extend: {
-                    // Custom Colors (Approximation based on original CSS variables)
+                    // Custom Colors (We are using black/white/gray defaults for high contrast)
                     colors: {
                         'text-color': '#1a1a1a', // Light mode primary text
                         'accent-color': '#4a4a4a', // Light mode secondary text
                         'subtext-color': '#666666', // Light mode tertiary/mono text
                         'link-color': '#000000', // Light mode link color
-                        // We will rely on default Tailwind colors (black, white, gray-400, gray-900) for dark mode contrast
                     },
                     // Custom Fonts
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'], // --font-main
                         mono: ['JetBrains Mono', 'monospace'], // --font-mono
                     },
-                    // Custom Spacing (Approximation based on --spacing-unit: 1.5rem;)
-                    spacing: {
-                        'spacing-unit': '1.5rem',
-                    },
                     // Keyframes and Animation for Typewriter
                     keyframes: {
                         blink: {
-                            '0%, 100%': { opacity: '1' },
-                            '50%': { opacity: '0' },
+                            '0%, 100%': {
+                                opacity: '1'
+                            },
+                            '50%': {
+                                opacity: '0'
+                            },
                         },
                         fadeIn: {
-                            'from': { opacity: '0', transform: 'translateY(10px)' },
-                            'to': { opacity: '1', transform: 'translateY(0)' },
+                            'from': {
+                                opacity: '0',
+                                transform: 'translateY(10px)'
+                            },
+                            'to': {
+                                opacity: '1',
+                                transform: 'translateY(0)'
+                            },
                         }
                     },
                     animation: {
@@ -61,7 +66,6 @@
 
     <style>
         /* Dark Mode Specific Styles */
-        /* Set body to true black background when 'dark' class is present on html */
         html.dark body {
             background-color: #000000;
             color: #ffffff;
@@ -75,16 +79,14 @@
 
         .item-list>li::before {
             content: "—";
-            /* Em dash style bullet */
             position: absolute;
             left: 0;
             color: #ccc;
-            /* Light gray in light mode */
         }
 
         /* Dark mode adjustment for the bullet point (make it visible but subtle) */
         html.dark .item-list>li::before {
-            color: #4b5563; /* Darker gray in dark mode */
+            color: #4b5563;
         }
 
         /* Stagger animations (Need to use custom selectors for nth-child delays) */
@@ -108,13 +110,16 @@
             animation-delay: 0.5s;
         }
 
+        .fade-section:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
         /* The custom cursor styling requires direct CSS for the animation */
         .cursor-custom {
             display: inline-block;
             width: 8px;
             height: 1.2em;
             background-color: #1a1a1a;
-            /* Light mode color */
             margin-left: 4px;
             animation: blink 1s step-end infinite;
         }
@@ -148,6 +153,10 @@
                 <a href="https://github.com/janak27"
                     class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
                     <i class="fab fa-github"></i>
+                </a>
+                <a href="https://medium.com/@avhadjanak"
+                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
+                    <i class="fab fa-medium"></i>
                 </a>
                 <a href="https://www.linkedin.com/in/janak-avhad/"
                     class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
@@ -195,23 +204,29 @@
                         <span class="font-semibold text-base">Software Engineer</span>
                         <span class="font-mono text-xs text-subtext-color dark:text-gray-400">Nov 2023 - Present</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color dark:text-gray-300">Tata Consultancy Services (TCS) | Nagpur, India
+                    <div class="text-[0.95rem] text-accent-color dark:text-gray-300">Tata Consultancy Services (TCS) |
+                        Nagpur, India
                     </div>
                     <div class="text-[0.95rem] text-accent-color mt-1">
-                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">Project: Oracle HFM-Based Enterprise
+                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">Project: Oracle
+                            HFM-Based Enterprise
                             Applications for Global Finance Client</span>
                     </div>
                     <div class="text-[0.95rem] text-accent-color dark:text-gray-300">
-                        <ul class="list-none mt-2.5 space-y-1 item-list">
-                            <li>Designed and deployed automation workflows using <ins>Java, Python, and FDMEE</ins> for
-                                HFM, <ins>optimizing the month-end close process and reducing manual effort by over
-                                    40%</ins>.</li>
-                            <li>Developed and maintained core HFM applications, including metadata, business rules
-                                (VBScript), and data journals, ensuring accurate and scalable global financial
-                                consolidation.</li>
-                            <li>Engineered and optimized <ins>FDMEE mappings</ins>, transformation logic, and
-                                PL/SQL-based rules for automated data extraction and loading, ensuring seamless and
-                                accurate integration with Oracle DB.</li>
+                        <ul class="list-none mt-2.5 space-y-2 item-list">
+                            <li>Developed and maintained <u>four core Microservices</u> using <u>Java</u> and the
+                                <u>Spring Boot framework</u> to create highly scalable backend logic for financial data
+                                processing and consumption.</li>
+                            <li>Designed and implemented <u>RESTful APIs</u> for these services to expose consolidated
+                                HFM data, enabling seamless integration with external reporting tools and reducing data
+                                latency by 30%.</li>
+                            <li>Engineered and deployed automation workflows using Java, Python, and FDMEE for HFM,
+                                optimizing the month-end close process and reducing manual effort by over 40%.</li>
+                            <li>Utilized <u>PL/SQL</u> and <u>Java Database Connectivity (JDBC)</u> to manage complex
+                                data extraction, transformation, and loading (ETL) logic, ensuring high data accuracy
+                                between the Oracle HFM system and external databases.</li>
+                            <li>Wrote robust business rules (VBScript) and managed application metadata within HFM to
+                                ensure accurate and compliant global financial consolidation.</li>
                             <li>Created dynamic financial reports and dashboards using Smart View and Excel Macros to
                                 provide business users with real-time financial insights.</li>
                             <li>Collaborated with global Finance, IT, and Audit teams to build high-performance,
@@ -235,7 +250,8 @@
                         </a>
                     </div>
                     <div class="text-[0.95rem] text-accent-color mt-1">
-                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400"> React, Tailwindcss Django, Neo4jDB,
+                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400"> React, Tailwindcss,
+                            Django, Neo4jDB,
                             AWS, Jenkins</span>
                     </div>
                     <div class="text-[0.95rem] text-accent-color dark:text-gray-300">
@@ -256,7 +272,8 @@
                         </a>
                     </div>
                     <div class="text-[0.95rem] text-accent-color mt-1">
-                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">React, Django, Neo4jDB, GCP</span>
+                        <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">React, Django,
+                            Neo4jDB, GCP</span>
                     </div>
                     <div class="text-[0.95rem] text-accent-color dark:text-gray-300">
                         <ul class="list-none mt-2.5 space-y-1 item-list">
@@ -266,6 +283,16 @@
                                 collaborate on missing concepts.</li>
                         </ul>
                     </div>
+                </div>
+            </section>
+
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
+                <h2
+                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+                    Writing & Thoughts (Medium)
+                </h2>
+
+                <div id="blogs-container">
                 </div>
             </section>
 
@@ -282,12 +309,12 @@
                             Mumbai</span>
                         <span class="font-mono text-xs text-subtext-color dark:text-gray-400">Aug 2019 - Jun 2023</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color italic dark:text-gray-300">Bachelor of Engineering - BE in Information
+                    <div class="text-[0.95rem] text-accent-color italic dark:text-gray-300">Bachelor of Engineering - BE
+                        in Information
                         Technology | Grade: 9.02</div>
                     <div class="font-mono text-xs text-subtext-color dark:text-gray-400">Navi Mumbai, India</div>
                 </div>
             </section>
-
             <section class="mb-12 opacity-0 fade-section animate-fadeIn">
                 <h2
                     class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
@@ -296,19 +323,29 @@
                 <div class="mb-4"> <strong class="block mb-2 text-sm font-semibold">Technical Skills (Full-Stack &
                         Enterprise)</strong>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Java</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Python</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Spring
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Java</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Python</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Spring
                             Boot</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Oracle HFM /
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Oracle
+                            HFM /
                             FDMEE</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">PL/SQL</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">PL/SQL</span>
                         <span
                             class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">TypeScript</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">React</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Node.js</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">AWS</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Docker</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">React</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Node.js</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">AWS</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Docker</span>
 
                         <span
                             class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Git/GitHub</span>
@@ -318,14 +355,19 @@
                 <div class="mb-4"> <strong class="block mb-2 text-sm font-semibold">Data, AI & Foundational
                         Concepts</strong>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">AI
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">AI
                             Agents</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Data Structures
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Data
+                            Structures
                             & Algorithms</span>
                         <span
                             class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Databases</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Networks</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">System
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Networks</span>
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">System
                             Design</span>
                     </div>
                 </div>
@@ -333,13 +375,16 @@
                 <div class="mb-4">
                     <strong class="block mb-2 text-sm font-semibold">Soft Skills</strong>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Problem
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Problem
                             Solving</span>
                         <span
                             class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Communication</span>
                         <span
                             class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Collaboration</span>
-                        <span class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Curiosity &
+                        <span
+                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Curiosity
+                            &
                             Growth</span>
                     </div>
                 </div>
@@ -359,7 +404,6 @@
         const htmlElement = document.documentElement;
         const themeIcon = document.getElementById('theme-icon');
 
-        // Check for saved theme preference or system preference
         function applyTheme() {
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -385,8 +429,54 @@
             }
         });
 
-        // Apply theme on load
         applyTheme();
+
+        // --- Dynamic Blog Loader Logic ---
+        async function loadBlogs() {
+            try {
+                // Fetch the JSON data from the relative path
+                const response = await fetch('blogs.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok. Ensure blogs.json is in the same directory.');
+                }
+                const blogs = await response.json();
+
+                // Get the container element
+                const container = document.getElementById('blogs-container');
+                let blogHTML = '';
+
+                // Loop through the data and build HTML string
+                blogs.forEach(blog => {
+                    blogHTML += `
+                    <div class="mb-8">
+                        <div class="flex justify-between items-baseline flex-wrap mb-1">
+                            <a href="${blog.link}" target="_blank"
+                                class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300 dark:hover:text-white dark:decoration-gray-700">
+                                ${blog.title}
+                            </a>
+                            <span class="font-mono text-xs text-subtext-color dark:text-gray-400">${blog.date}</span>
+                        </div>
+                        <div class="text-[0.95rem] text-accent-color mt-1">
+                            <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">${blog.tags}</span>
+                        </div>
+                        <div class="text-[0.95rem] text-accent-color dark:text-gray-300 mt-2">
+                            ${blog.description}
+                        </div>
+                    </div>
+                    `;
+                });
+
+                // Insert the generated HTML into the container
+                container.innerHTML = blogHTML;
+
+            } catch (error) {
+                console.error('Failed to load blogs:', error);
+                document.getElementById('blogs-container').innerHTML = '<p class="text-[0.95rem] text-red-500 dark:text-red-400">Error loading blog posts. Check the console for details.</p>';
+            }
+        }
+
+        // Call the function when the page loads
+        loadBlogs();
 
 
         // --- Typewriter Effect Logic ---
