@@ -1,0 +1,16 @@
+[
+    {
+        "title": "Implementing JWT Token-Based Security in Spring Boot 3 Applications",
+        "link": "https://medium.com/@avhadjanak/implementing-jwt-token-based-security-in-spring-boot-3-applications-b01265675935",
+        "date": "Jun 1, 2025",
+        "tags": "Spring Boot 3, JWT, Spring Security, Java 17/21",
+        "description": "In this tutorial, we’ll build a simple authentication system using JWT (JSON Web Token) with Spring Boot 3 and Java 17/21, covering token generation, validation, and role-based access control."
+    },
+    {
+        "title": "Tailwind CSS New Features: What You Need to Know",
+        "link": "https://medium.com/@avhadjanak/tailwind-css-new-features-what-you-need-to-know-e721076edad8",
+        "date": "Apr 3, 2025",
+        "tags": "Tailwind CSS, Frontend, CSS Variables, JIT Engine, v4.0",
+        "description": "Tailwind CSS continues to evolve with powerful features like CSS variables for theming, @layer enhancements, and new utilities to enhance development speed and flexibility, along with major JIT engine performance improvements."
+    }
+]
