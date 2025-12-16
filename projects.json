@@ -1,5 +1,11 @@
 [
   {
+    "title": "MedFlow: Pharma Microservices Platform",
+    "link": "https://github.com/janak27/MedFlow",
+    "tags": "Java, Spring Boot, Microservices, PostgreSQL, Docker, Kafka, Redis",
+    "description": "A backend-first microservices platform for pharmacy operations, designed using Java and Spring Boot to handle inventory, orders, and transactional workflows with a strong focus on scalability, reliability, and clean service boundaries."
+  },
+  {
     "title": "PlaceIt: Placement Integration System",
     "link": "https://github.com/Place-IT",
     "tags": "React, Tailwindcss, Django, Neo4jDB, AWS, Jenkins",
