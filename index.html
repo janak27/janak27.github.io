@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Janak Avhad | Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="./favicon_io/favicon.ico">
-    <link rel="shortcut icon" href="./favicon_io/favicon.ico">
-    <link rel="apple-touch-icon" href="./favicon_io/favicon-16x16.png">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -31,7 +30,6 @@
                     },
                     // Custom Fonts
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'], // --font-main
                         mono: ['JetBrains Mono', 'monospace'], // --font-mono
                     },
                     // Keyframes and Animation for Typewriter
@@ -132,22 +130,22 @@
 </head>
 
 <body
-    class="bg-white text-text-color font-sans leading-relaxed text-base antialiased p-8 md:p-12 transition-colors duration-300 dark:bg-black dark:text-white">
-    <div class="max-w-[680px] mx-auto pb-16">
+    class="bg-white text-text-color font-mono leading-relaxed text-base antialiased p-8 md:p-12 transition-colors duration-300 dark:bg-black dark:text-white">
+    <div class="max-w-[680px] mx-auto">
 
         <header class="mb-12 pb-4 border-b border-gray-200 dark:border-gray-800 relative">
-            <button id="theme-toggle"
-                class="absolute top-0 right-0 p-1 text-subtext-color dark:text-gray-400 hover:text-link-color dark:hover:text-white transition-colors duration-300 focus:outline-none">
+            <button id="theme-toggle" class="absolute top-0 right-0 text-subtext-color focus:outline-none">
                 <i id="theme-icon" class="fas fa-sun"></i>
             </button>
 
-            <h1 class="font-mono text-2xl font-medium min-h-[2em] flex items-center mb-2">
+            <h1 class="text-2xl font-medium mb-2">
                 Janak Avhad
             </h1>
-            <h3 class="font-mono text-md font-medium min-h-[2em] flex items-center mb-2">
+
+            <h2 class="text-md font-medium mb-2">
                 <span id="typewriter-text"></span>
                 <span class="cursor-custom"></span>
-            </h3>
+            </h2>
 
             <div class="flex gap-8 text-sm mt-4">
                 <a href="https://github.com/janak27"
@@ -182,80 +180,52 @@
         </header>
 
         <main>
-            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2
-                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn space-y-4">
+                <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
                     Objective
-                </h2>
-                <p class="text-[0.95rem] text-accent-color dark:text-gray-300">
+                </h3>
+                <p class="text-sm leading-relaxed dark:text-gray-300">
                     Java Backend Engineer focused on building reliable Spring Boot microservices and clean backend
-                    systems. I work on designing REST APIs and building services that scale and stay stable in
-                    production.
-
-                    I enjoy breaking down complex workflows, improving performance and reliability, and owning features
-                    end-to-end—from implementation to demos and feedback. Currently building and refining backend
-                    systems while exploring better ways to design and operate microservices.
-
-                    Open to backend roles, collaborations, and interesting engineering problems.
+                    systems. I enjoy breaking and building complex workflows, improving performance, and owning features
+                    end-to-end.
                 </p>
             </section>
 
-            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2
-                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn space-y-6">
+                <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
                     Experience
-                </h2>
+                </h3>
 
                 <div class="mb-8">
                     <div
                         class="flex justify-between items-baseline flex-wrap mb-1 md:flex-row md:gap-0 flex-col gap-0.5">
-                        <span class="font-semibold text-base">Software Engineer</span>
+                        <span class="font-semibold text-base">Systems Engineer - C1</span>
                         <span class="font-mono text-xs text-subtext-color dark:text-gray-400">Nov 2023 - Present</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color dark:text-gray-300">Tata Consultancy Services (TCS) |
-                        Nagpur, India
+                    <div class="text-sm text-accent-color dark:text-gray-300">Tata Consultancy Services (TCS) |
+                        Bengaluru, India
                     </div>
-                    <div class="text-[0.95rem] text-accent-color mt-1">
+                    <div class="text-sm text-accent-color mt-1">
                         <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">
                             Project: Finance operation project of a Global Airline Client</span>
                     </div>
-                    <div class="text-[0.95rem] text-accent-color dark:text-gray-300">
+                    <div class="text-sm text-accent-color dark:text-gray-300">
                         <ul class="list-none mt-2.5 space-y-2 item-list">
                             <li>
-                                Built and maintained <u>Java Spring Boot microservices</u> to handle <u>high-volume
-                                    financial data processing</u>,
-                                integrating tightly with <u>SQL Server</u> for performant backend operations.
+                                Owned Spring Boot microservices processing high-volume financial transactions, designed
+                                for scalability and fault tolerance.
                             </li>
-
                             <li>
-                                Designed and optimized <u>SQL Server views, joins, indexes, and ACID-compliant data
-                                    pipelines</u> to support
-                                <u>large-scale transactional workflows</u>.
+                                Architected SQL Server data pipelines (views, joins, indexes) to ensure ACID guarantees
+                                and efficient large-scale performance.
                             </li>
-
                             <li>
-                                Automated <u>multi-step backend workflows</u> using <u>Spring Boot schedulers, REST
-                                    APIs, and JDBC</u>,
-                                significantly reducing manual effort and operational overhead.
+                                Improved system reliability using idempotent APIs, retries, circuit breakers
+                                (Resilience4j), and controlled parallel processing.
                             </li>
-
                             <li>
-                                Improved system reliability by implementing <u>idempotent APIs</u>, <u>retry and circuit
-                                    breaker patterns
-                                    using Resilience4j</u>, and <u>safe parallel reprocessing</u> with
-                                <u>ThreadPoolExecutorService</u>.
-                            </li>
-
-                            <li>
-                                Supported <u>Non-Functional Requirements (NFRs)</u> by performing <u>SAST, DAST, and CVC
-                                    scans</u>,
-                                fixing vulnerabilities, and ensuring <u>enterprise security compliance</u>.
-                            </li>
-
-                            <li>
-                                Collaborated closely with stakeholders by <u>presenting MVP demos</u>, gathering
-                                feedback,
-                                and iterating on <u>backend features</u> to improve real-world usability.
+                                Automated backend workflows and drove production readiness by enforcing security and
+                                reliability NFRs.
                             </li>
 
                         </ul>
@@ -264,11 +234,10 @@
             </section>
 
             <!-- Projects Section: Now dynamically loaded by JavaScript -->
-            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2
-                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn space-y-6">
+                <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
                     Projects
-                </h2>
+                </h3>
 
                 <div id="projects-container">
                     <!-- Loaded dynamically -->
@@ -276,101 +245,40 @@
             </section>
 
 
-            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2
-                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn space-y-6">
+                <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
                     Writing & Thoughts (Medium)
-                </h2>
+                </h3>
 
                 <div id="blogs-container">
                     <!-- Blogs will be injected here -->
                 </div>
             </section>
 
-            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2
-                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn space-y-6">
+                <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
                     Education
-                </h2>
+                </h3>
 
                 <div class="mb-8">
+                    <div class="flex justify-between items-baseline flex-wrap mb-1">
+                        <span class="font-semibold text-base">
+                            Bharati Vidyapeeth College of Engineering
+                        </span>
+                        <span class="font-mono text-xs text-subtext-color dark:text-gray-400">
+                            2019 – 2023
+                        </span>
+                    </div>
+
                     <div
-                        class="flex justify-between items-baseline flex-wrap mb-1 md:flex-row md:gap-0 flex-col gap-0.5">
-                        <span class="font-semibold text-base">Bharati Vidyapeeth College of Engineering, Navi
-                            Mumbai</span>
-                        <span class="font-mono text-xs text-subtext-color dark:text-gray-400">Aug 2019 - Jun 2023</span>
-                    </div>
-                    <div class="text-[0.95rem] text-accent-color italic dark:text-gray-300">Bachelor of Engineering - BE
-                        in Information
-                        Technology | Grade: 9.02</div>
-                    <div class="font-mono text-xs text-subtext-color dark:text-gray-400">Navi Mumbai, India</div>
-                </div>
-            </section>
-            <section class="mb-12 opacity-0 fade-section animate-fadeIn">
-                <h2
-                    class="font-mono text-sm uppercase tracking-wider text-subtext-color mb-6 font-medium dark:text-gray-400">
-                    Skills</h2>
-
-                <div class="mb-4"> <strong class="block mb-2 text-sm font-semibold">Technical Skills (Full-Stack &
-                        Enterprise)</strong>
-                    <div class="flex flex-wrap gap-2">
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Java</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Python</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Spring
-                            Boot</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">TypeScript</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">React</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">AWS</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Docker</span>
-
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Git/GitHub</span>
+                        class="flex justify-between items-baseline text-sm italic text-accent-color dark:text-gray-300">
+                        <span>BE, Information Technology</span>
+                        <span class="font-mono text-xs not-italic text-subtext-color dark:text-gray-400">
+                            CGPA 9.02 · Navi Mumbai
+                        </span>
                     </div>
                 </div>
 
-                <div class="mb-4"> <strong class="block mb-2 text-sm font-semibold">Data, AI & Foundational
-                        Concepts</strong>
-                    <div class="flex flex-wrap gap-2">
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">AI
-                            Agents</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Data
-                            Structures
-                            & Algorithms</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Databases</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Networks</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">System
-                            Design</span>
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <strong class="block mb-2 text-sm font-semibold">Soft Skills</strong>
-                    <div class="flex flex-wrap gap-2">
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Problem
-                            Solving</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Communication</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Collaboration</span>
-                        <span
-                            class="bg-gray-100 px-2.5 py-1 rounded-md text-sm text-gray-700 font-mono dark:bg-gray-900 dark:text-white">Curiosity
-                            &
-                            Growth</span>
-                    </div>
-                </div>
             </section>
         </main>
 
@@ -388,18 +296,11 @@
         const themeIcon = document.getElementById('theme-icon');
 
         function applyTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                htmlElement.classList.add('dark');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-            } else {
-                htmlElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-            }
+            htmlElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
         }
+
 
         themeToggle.addEventListener('click', () => {
             if (htmlElement.classList.contains('dark')) {
@@ -436,14 +337,10 @@
                             </a>
                         </div>
 
-                        <div class="text-[0.95rem] text-accent-color mt-1">
+                        <div class="text-sm text-accent-color mt-1">
                             <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">
                                 ${p.tags}
                             </span>
-                        </div>
-
-                        <div class="text-[0.95rem] text-accent-color dark:text-gray-300 mt-2">
-                            ${p.description}
                         </div>
                     </div>`;
                 });
@@ -483,11 +380,8 @@
                                 </a>
                                 <span class="font-mono text-xs text-subtext-color dark:text-gray-400">${blog.date}</span>
                             </div>
-                            <div class="text-[0.95rem] text-accent-color mt-1">
+                            <div class="text-sm text-accent-color mt-1">
                                 <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">${blog.tags}</span>
-                            </div>
-                            <div class="text-[0.95rem] text-accent-color dark:text-gray-300 mt-2">
-                                ${blog.description}
                             </div>
                         </div>
                         `;
@@ -498,7 +392,7 @@
 
             } catch (error) {
                 console.error('Failed to load blogs:', error);
-                document.getElementById('blogs-container').innerHTML = '<p class="text-[0.95rem] text-red-500 dark:text-red-400">Error loading blog posts. Check the console for details.</p>';
+                document.getElementById('blogs-container').innerHTML = '<p class="text-sm text-red-500 dark:text-red-400">Error loading blog posts. Check the console for details.</p>';
             }
         }
 
@@ -510,11 +404,12 @@
 
         // --- Typewriter Effect Logic ---
         const phrases = [
-            "Software Engineer",
-            "Full-Stack Developer",
-            "AI & LLM Enthusiast",
-            "Avid Reader"
+            "Backend Engineer",
+            "Building Reliable Systems",
+            "Designing for Scale",
+            "Clean Backend Architecture"
         ];
+
 
         const el = document.getElementById("typewriter-text");
         let sleepTime = 100;

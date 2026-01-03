@@ -2,19 +2,16 @@
   {
     "title": "MedFlow: Pharma Microservices Platform",
     "link": "https://github.com/janak27/MedFlow",
-    "tags": "Java, Spring Boot, Microservices, PostgreSQL, Docker, Kafka, Redis",
-    "description": "A backend-first microservices platform for pharmacy operations, designed using Java and Spring Boot to handle inventory, orders, and transactional workflows with a strong focus on scalability, reliability, and clean service boundaries."
+    "tags": "Java, Spring Boot, Microservices, PostgreSQL, Docker, Kafka, Redis"
   },
   {
     "title": "PlaceIt: Placement Integration System",
     "link": "https://github.com/Place-IT",
-    "tags": "React, Tailwindcss, Django, Neo4jDB, AWS, Jenkins",
-    "description": "A full-stack system leveraging React, Django, and Neo4jDB to streamline college placement data management, offering automated data handling and real-time student visualization."
+    "tags": "React, Tailwindcss, Django, Neo4jDB, AWS, Jenkins"
   },
   {
     "title": "ShortSnips - DSA Revising Code Snippets",
     "link": "https://github.com/Short-Snips/Snips_contribution",
-    "tags": "React, Django, Neo4jDB, GCP",
-    "description": "An open-source, community-driven platform built with React, Django, and Neo4jDB, providing a centralized resource for revising Data Structures and Algorithms (DSA) concepts through code snippets."
+    "tags": "React, Django, Neo4jDB, GCP"  
   }
 ]
