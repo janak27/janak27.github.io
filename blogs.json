@@ -1,14 +1,20 @@
 [
-    {
-        "title": "Implementing JWT Token-Based Security in Spring Boot 3 Applications",
-        "link": "https://medium.com/@avhadjanak/implementing-jwt-token-based-security-in-spring-boot-3-applications-b01265675935",
-        "date": "Jun 1, 2025",
-        "tags": "Spring Boot 3, JWT, Spring Security, Java 17/21"
-    },
-    {
-        "title": "Tailwind CSS New Features: What You Need to Know",
-        "link": "https://medium.com/@avhadjanak/tailwind-css-new-features-what-you-need-to-know-e721076edad8",
-        "date": "Apr 3, 2025",
-        "tags": "Tailwind CSS, Frontend, CSS Variables, JIT Engine, v4.0"
-    }
+  {
+    "title": "HashMap Internals in Java",
+    "link": "https://medium.com/@avhadjanak/hashmap-internals-in-java-636206c36c9b",
+    "date": "Apr 3, 2026",
+    "tags": "Java, HashMap, Collections Framework, Data Structures, Interview Preparation"
+  },
+  {
+    "title": "Implementing JWT Token-Based Security in Spring Boot 3 Applications",
+    "link": "https://medium.com/@avhadjanak/implementing-jwt-token-based-security-in-spring-boot-3-applications-b01265675935",
+    "date": "Jun 1, 2025",
+    "tags": "Spring Boot 3, JWT, Spring Security, Java 17/21"
+  },
+  {
+    "title": "Tailwind CSS New Features: What You Need to Know",
+    "link": "https://medium.com/@avhadjanak/tailwind-css-new-features-what-you-need-to-know-e721076edad8",
+    "date": "Apr 3, 2025",
+    "tags": "Tailwind CSS, Frontend, CSS Variables, JIT Engine, v4.0"
+  }
 ]

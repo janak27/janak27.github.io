@@ -1,17 +1,26 @@
 [
   {
-    "title": "MedFlow: Pharma Microservices Platform",
+    "title": "MedFlow - Healthcare Workflow & Patient Management Platform",
     "link": "https://github.com/janak27/MedFlow",
-    "tags": "Java, Spring Boot, Microservices, PostgreSQL, Docker, Kafka, Redis"
+    "tags": "Java • Spring Boot • Angular • PostgreSQL • REST APIs • JWT",
+    "description": "Developed a healthcare management platform for streamlining patient registration, appointment scheduling, medical records management, and doctor-patient workflows. Built secure REST APIs with Spring Boot, integrated role-based authentication, and designed responsive Angular interfaces for efficient healthcare operations."
   },
   {
-    "title": "PlaceIt: Placement Integration System",
-    "link": "https://github.com/Place-IT",
-    "tags": "React, Tailwindcss, Django, Neo4jDB, AWS, Jenkins"
+    "title": "PlaceIT - AI Powered Placement Management System",
+    "link": "https://github.com/janak27/placeit",
+    "tags": "TensorFlow • Scikit-learn • Django • React • TypeScript • IEEE Publication",
+    "description": "Developed an ML-based recommendation system for student-job matching using TensorFlow and Scikit-learn, integrated with Django and React for real-time placement recommendations."
   },
   {
-    "title": "ShortSnips - DSA Revising Code Snippets",
+    "title": "InfraPulse - Infrastructure Monitoring & Network Diagnostics Platform",
+    "link": "https://github.com/janak27/infrapulse",
+    "tags": "Python • Flask • REST APIs • DNS • SSL Monitoring • Dashboard",
+    "description": "Built a real-time infrastructure monitoring dashboard that performs DNS, SSL, latency, and connectivity diagnostics while providing actionable operational insights through an interactive web interface."
+  },
+  {
+    "title": "ShortSnips - DSA Revision & Code Snippet Platform",
     "link": "https://github.com/Short-Snips/Snips_contribution",
-    "tags": "React, Django, Neo4jDB, GCP"  
+    "tags": "React • Django • Neo4j • GCP",
+    "description": "Contributed to a collaborative platform for organizing and revising Data Structures & Algorithms concepts through curated code snippets, leveraging Django APIs, React-based UI components, Neo4j graph database relationships, and cloud deployment on GCP."
   }
 ]

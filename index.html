@@ -172,7 +172,7 @@
                     class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
                     <i class="fab fa-medium"></i>
                 </a>
-                <a href="https://drive.google.com/file/d/1Qw7U6OXQ9kcC6stubP-7XE3IRZX0s7ct/view?usp=sharing"
+                <a href="https://drive.google.com/file/d/1K6HcvpiVjDh_naNmqAzF9QADH7O1VTZs/view?usp=sharing"
                     class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
                     <i class="fa fa-file"></i>
                 </a>
@@ -185,9 +185,13 @@
                     Objective
                 </h3>
                 <p class="text-sm leading-relaxed dark:text-gray-300">
-                    Java Backend Engineer focused on building reliable Spring Boot microservices and clean backend
-                    systems. I enjoy breaking and building complex workflows, improving performance, and owning features
-                    end-to-end.
+                    Software Engineer with nearly 3 years of experience building scalable Java-based backend and
+                    full-stack
+                    applications using Java, Spring Boot, Angular, Microservices, and AWS. Experienced in designing REST
+                    APIs,
+                    asynchronous processing, cloud-native applications, and resilient distributed systems while
+                    delivering
+                    end-to-end solutions in Agile environments.
                 </p>
             </section>
 
@@ -199,11 +203,11 @@
                 <div class="mb-8">
                     <div
                         class="flex justify-between items-baseline flex-wrap mb-1 md:flex-row md:gap-0 flex-col gap-0.5">
-                        <span class="font-semibold text-base">Systems Engineer - C1</span>
+                        <span class="font-semibold text-base">Software Engineer</span>
                         <span class="font-mono text-xs text-subtext-color dark:text-gray-400">Nov 2023 - Present</span>
                     </div>
                     <div class="text-sm text-accent-color dark:text-gray-300">Tata Consultancy Services (TCS) |
-                        Bengaluru, India
+                        Bengaluru, India (Remote)
                     </div>
                     <div class="text-sm text-accent-color mt-1">
                         <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">
@@ -211,22 +215,43 @@
                     </div>
                     <div class="text-sm text-accent-color dark:text-gray-300">
                         <ul class="list-none mt-2.5 space-y-2 item-list">
-                            <li>
-                                Owned Spring Boot microservices processing high-volume financial transactions, designed
-                                for scalability and fault tolerance.
-                            </li>
-                            <li>
-                                Architected SQL Server data pipelines (views, joins, indexes) to ensure ACID guarantees
-                                and efficient large-scale performance.
-                            </li>
-                            <li>
-                                Improved system reliability using idempotent APIs, retries, circuit breakers
-                                (Resilience4j), and controlled parallel processing.
-                            </li>
-                            <li>
-                                Automated backend workflows and drove production readiness by enforcing security and
-                                reliability NFRs.
-                            </li>
+                            <ul class="list-none mt-2.5 space-y-2 item-list">
+                                <li>
+                                    Built and maintained Spring Boot microservices supporting financial workflows,
+                                    enabling reliable data processing and communication across distributed production
+                                    systems.
+                                </li>
+
+                                <li>
+                                    Automated month-end financial reporting through SQL-based data pipelines, scheduled
+                                    jobs, and backend automation, reducing manual effort by 50%+.
+                                </li>
+
+                                <li>
+                                    Developed Angular 17 dashboards and internal finance tools integrated with RESTful
+                                    APIs, improving operational visibility and business workflows.
+                                </li>
+
+                                <li>
+                                    Implemented secure authentication and authorization using Spring Security, JWT, and
+                                    Role-Based Access Control (RBAC).
+                                </li>
+
+                                <li>
+                                    Improved application reliability using Redis caching and Resilience4j while enabling
+                                    asynchronous processing through Kafka, RabbitMQ, and ExecutorService.
+                                </li>
+
+                                <li>
+                                    Contributed to AWS-based deployments using EC2, S3, and IAM for secure and scalable
+                                    application environments.
+                                </li>
+
+                                <li>
+                                    Delivered features end-to-end across backend and frontend systems from requirement
+                                    analysis to deployment and production support.
+                                </li>
+                            </ul>
 
                         </ul>
                     </div>
@@ -274,7 +299,7 @@
                         class="flex justify-between items-baseline text-sm italic text-accent-color dark:text-gray-300">
                         <span>BE, Information Technology</span>
                         <span class="font-mono text-xs not-italic text-subtext-color dark:text-gray-400">
-                            CGPA 9.02 · Navi Mumbai
+                            CGPA 9.2 · Navi Mumbai
                         </span>
                     </div>
                 </div>
@@ -318,41 +343,45 @@
 
         // --- Dynamic Project Loader Logic ---
         async function loadProjects() {
-            try {
-                const res = await fetch("projects.json");
-                if (!res.ok) throw new Error("Check projects.json path");
+    try {
+        const res = await fetch("projects.json");
+        if (!res.ok) throw new Error("Check projects.json path");
 
-                const projects = await res.json();
-                const container = document.getElementById("projects-container");
+        const projects = await res.json();
+        const container = document.getElementById("projects-container");
 
-                let html = "";
+        let html = "";
 
-                projects.forEach(p => {
-                    html += `
-                    <div class="mb-8">
-                        <div class="flex justify-between items-baseline flex-wrap mb-1">
-                            <a href="${p.link}" target="_blank"
-                                class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300 dark:hover:text-white dark:decoration-gray-700">
-                                ${p.title}
-                            </a>
-                        </div>
+        projects.forEach(p => {
+            html += `
+            <div class="mb-8">
+                <div class="flex justify-between items-baseline flex-wrap mb-1">
+                    <a href="${p.link}" target="_blank"
+                        class="font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300 dark:hover:text-white dark:decoration-gray-700">
+                        ${p.title}
+                    </a>
+                </div>
 
-                        <div class="text-sm text-accent-color mt-1">
-                            <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">
-                                ${p.tags}
-                            </span>
-                        </div>
-                    </div>`;
-                });
+                <div class="text-sm text-accent-color mt-1">
+                    <span class="font-mono text-xs text-subtext-color block dark:text-gray-400">
+                        ${p.tags}
+                    </span>
+                </div>
 
-                container.innerHTML = html;
+                <p class="text-sm mt-2 leading-relaxed dark:text-gray-300">
+                    ${p.description}
+                </p>
+            </div>`;
+        });
 
-            } catch (err) {
-                console.error(err);
-                document.getElementById("projects-container").innerHTML =
-                    `<p class="text-red-500 dark:text-red-400">Error loading projects.</p>`;
-            }
-        }
+        container.innerHTML = html;
+
+    } catch (err) {
+        console.error(err);
+        document.getElementById("projects-container").innerHTML =
+            `<p class="text-red-500 dark:text-red-400">Error loading projects.</p>`;
+    }
+}
 
 
         // --- Dynamic Blog Loader Logic (Existing) ---
@@ -404,10 +433,11 @@
 
         // --- Typewriter Effect Logic ---
         const phrases = [
-            "Backend Engineer",
-            "Building Reliable Systems",
-            "Designing for Scale",
-            "Clean Backend Architecture"
+            "Java Full Stack Engineer",
+            "Spring Boot & Angular",
+            "Microservices & Distributed Systems",
+            "AWS Cloud Applications",
+            "Building Reliable Software"
         ];
 
 
