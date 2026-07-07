@@ -258,6 +258,26 @@
                 </div>
             </section>
 
+            <section class="mb-12 opacity-0 fade-section animate-fadeIn space-y-6">
+
+    <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
+        Open Source
+    </h3>
+
+    <div class="space-y-6">
+
+        <img
+            id="github-stats"
+            class="w-full rounded-lg border border-gray-200 dark:border-gray-800">
+
+        <img
+            id="github-graph"
+            class="w-full rounded-lg border border-gray-200 dark:border-gray-800">
+
+    </div>
+
+</section>
+
             <!-- Projects Section: Now dynamically loaded by JavaScript -->
             <section class="mb-12 opacity-0 fade-section animate-fadeIn space-y-6">
                 <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
@@ -431,6 +451,17 @@
             loadBlogs();
         };
 
+        function updateGithubCards() {
+
+    const dark = document.documentElement.classList.contains("dark");
+
+    document.getElementById("github-stats").src =
+        `https://github-readme-stats.vercel.app/api?username=janak27&show_icons=true&hide_border=true&theme=${dark ? "github_dark" : "default"}`;
+
+    document.getElementById("github-graph").src =
+        `https://github-readme-activity-graph.vercel.app/graph?username=janak27&theme=${dark ? "github-dark" : "github"}&hide_border=true`;
+}
+
         // --- Typewriter Effect Logic ---
         const phrases = [
             "Java Full Stack Engineer",
@@ -439,6 +470,8 @@
             "AWS Cloud Applications",
             "Building Reliable Software"
         ];
+
+        
 
 
         const el = document.getElementById("typewriter-text");
