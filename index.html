@@ -198,7 +198,7 @@
                 </div>
             </section>
 
-            
+
 
             <!-- Projects Section: Now dynamically loaded by JavaScript -->
             <section class="mb-12 opacity-0 fade-section animate-fadeIn space-y-6">
@@ -237,9 +237,17 @@
         const themeIcon = document.getElementById('theme-icon');
 
         function applyTheme() {
-            htmlElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
+            const savedTheme = localStorage.getItem('theme');
+            const isDark = savedTheme === null || savedTheme === 'dark';
+
+            htmlElement.classList.toggle('dark', isDark);
+
+            themeIcon.classList.toggle('fa-moon', isDark);
+            themeIcon.classList.toggle('fa-sun', !isDark);
+
+            if (savedTheme === null) {
+                localStorage.setItem('theme', 'dark');
+            }
         }
 
 
@@ -259,17 +267,17 @@
 
         // --- Dynamic Project Loader Logic ---
         async function loadProjects() {
-    try {
-        const res = await fetch("projects.json");
-        if (!res.ok) throw new Error("Check projects.json path");
+            try {
+                const res = await fetch("projects.json");
+                if (!res.ok) throw new Error("Check projects.json path");
 
-        const projects = await res.json();
-        const container = document.getElementById("projects-container");
+                const projects = await res.json();
+                const container = document.getElementById("projects-container");
 
-        let html = "";
+                let html = "";
 
-        projects.forEach(p => {
-            html += `
+                projects.forEach(p => {
+                    html += `
             <div class="mb-8">
                 <div class="flex justify-between items-baseline flex-wrap mb-1">
                     <a href="${p.link}" target="_blank"
@@ -283,21 +291,17 @@
                         ${p.tags}
                     </span>
                 </div>
-
-                <p class="text-sm mt-2 leading-relaxed dark:text-gray-300">
-                    ${p.description}
-                </p>
             </div>`;
-        });
+                });
 
-        container.innerHTML = html;
+                container.innerHTML = html;
 
-    } catch (err) {
-        console.error(err);
-        document.getElementById("projects-container").innerHTML =
-            `<p class="text-red-500 dark:text-red-400">Error loading projects.</p>`;
-    }
-}
+            } catch (err) {
+                console.error(err);
+                document.getElementById("projects-container").innerHTML =
+                    `<p class="text-red-500 dark:text-red-400">Error loading projects.</p>`;
+            }
+        }
 
 
         // --- Dynamic Blog Loader Logic (Existing) ---
@@ -349,14 +353,14 @@
 
         function updateGithubCards() {
 
-    const dark = document.documentElement.classList.contains("dark");
+            const dark = document.documentElement.classList.contains("dark");
 
-    document.getElementById("github-stats").src =
-        `https://github-readme-stats.vercel.app/api?username=janak27&show_icons=true&hide_border=true&theme=${dark ? "github_dark" : "default"}`;
+            document.getElementById("github-stats").src =
+                `https://github-readme-stats.vercel.app/api?username=janak27&show_icons=true&hide_border=true&theme=${dark ? "github_dark" : "default"}`;
 
-    document.getElementById("github-graph").src =
-        `https://github-readme-activity-graph.vercel.app/graph?username=janak27&theme=${dark ? "github-dark" : "github"}&hide_border=true`;
-}
+            document.getElementById("github-graph").src =
+                `https://github-readme-activity-graph.vercel.app/graph?username=janak27&theme=${dark ? "github-dark" : "github"}&hide_border=true`;
+        }
 
         // --- Typewriter Effect Logic ---
         const phrases = [
@@ -367,7 +371,7 @@
             "Building Reliable Software"
         ];
 
-        
+
 
 
         const el = document.getElementById("typewriter-text");
