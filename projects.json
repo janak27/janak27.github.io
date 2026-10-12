@@ -1,5 +1,11 @@
 [
   {
+    "title": "Async Data Platform",
+    "link": "https://github.com/janak27/async-data-platform",
+    "tags": "Java • Spring Boot • Kafka • PostgreSQL • Redis • Docker",
+    "description": "Built an event-driven data processing platform using Spring Boot and Kafka to handle asynchronous workflows, with PostgreSQL for persistent storage, Redis for caching, and Docker for containerized development."
+  },
+  {
     "title": "MedFlow - Healthcare Workflow & Patient Management Platform",
     "link": "https://github.com/janak27/MedFlow",
     "tags": "Java • Spring Boot • Angular • PostgreSQL • REST APIs • JWT",
