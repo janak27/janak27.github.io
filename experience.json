@@ -1,0 +1,21 @@
+[
+  {
+    "company": "Tata Consultancy Services",
+    "role": "System Engineer",
+    "location": "Pune, Maharashtra, India",
+    "startDate": "Nov 2023",
+    "endDate": "Present",
+    "project": "Global Airline Client – Finance Operations",
+    "bullets": [
+      "Developed and maintained 4+ Spring Boot microservices supporting enterprise finance workflows.",
+      "Built and maintained 20+ REST APIs using Java, Spring Boot, Spring Data JPA, and SQL Server.",
+      "Implemented JWT authentication and role-based access control (RBAC) to secure APIs and finance operations.",
+      "Improved service resilience using Redis caching and Resilience4j Circuit Breaker and Retry patterns.",
+      "Integrated RabbitMQ for asynchronous service communication and Kafka for event-driven email workflows.",
+      "Developed and maintained Angular modules for finance workflows, validation, and journal generation.",
+      "Optimized SQL workflows, reducing manual effort by approximately 50% and saving 15+ hours per month-end cycle.",
+      "Performed root-cause analysis for 40+ production incidents and contributed to reliability improvements.",
+      "Wrote unit tests using JUnit and Mockito and supported application releases and production enhancements."
+    ]
+  }
+]
