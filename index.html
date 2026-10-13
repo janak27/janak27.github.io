@@ -206,18 +206,24 @@
     class="bg-white text-text-color font-mono leading-relaxed text-base antialiased p-8 md:p-12 transition-colors duration-300 dark:bg-black dark:text-white">
     <div class="max-w-[680px] mx-auto">
 
-        <header class="mb-8 pb-4 relative">
+        <header class="mb-2 pb-2 relative">
             <button id="theme-toggle" type="button" aria-label="Toggle light and dark theme"
                 class="absolute top-0 right-0 text-subtext-color dark:text-gray-400 focus:outline-none">
                 <i id="theme-icon" class="fas fa-moon" aria-hidden="true"></i>
             </button>
+            <div class="flex items-center gap-3">
+                <img src="/profile.png" alt="Janak Avhad"
+                    class="size-12 sm:size-14 md:size-16 shrink-0 rounded-xl object-cover border border-gray-300 dark:border-gray-700" />
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold">Janak Avhad</h1>
+                    <h2 class="text-md font-medium mb-2">
+                        <span id="typewriter-text"></span>
+                        <span class="cursor-custom" aria-hidden="true"></span>
+                    </h2>
+                </div>
+            </div>
 
-            <h1 class="text-2xl font-medium mb-2">Janak Avhad</h1>
 
-            <h2 class="text-md font-medium mb-2">
-                <span id="typewriter-text"></span>
-                <span class="cursor-custom" aria-hidden="true"></span>
-            </h2>
 
             <div class="flex gap-8 text-sm mt-4">
                 <a href="https://github.com/janak27" aria-label="GitHub"
@@ -707,15 +713,17 @@
 
         document.getElementById('back-to-blogs').addEventListener('click', returnToBlogs);
 
-        // --- Typewriter Effect ---
+        // --- Typewriter Effect --
         const phrases = [
-            'Java Full Stack Engineer',
-            'Spring Boot & Angular',
-            'Microservices & Distributed Systems',
-            'AWS Cloud Applications',
-            'Building Reliable Software'
+            'I build things that scale.',
+            'Java. Angular. Distributed systems.',
+            'Turning complex problems into clean code.',
+            'From API design to production.',
+            'Building beyond the happy path.',
+            'Making systems faster and more resilient.',
+            'Less complexity. Better engineering.',
+            'Good code. Solid systems. Real impact.'
         ];
-
         const typewriterElement = document.getElementById('typewriter-text');
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
