@@ -1,21 +1,23 @@
 [
   {
-    "company": "Tata Consultancy Services",
     "role": "System Engineer",
+    "company": "Tata Consultancy Services",
     "location": "Pune, Maharashtra, India",
     "startDate": "Nov 2023",
     "endDate": "Present",
     "project": "Global Airline Client – Finance Operations",
     "bullets": [
-      "Developed and maintained 4+ Spring Boot microservices supporting enterprise finance workflows.",
-      "Built and maintained 20+ REST APIs using Java, Spring Boot, Spring Data JPA, and SQL Server.",
-      "Implemented JWT authentication and role-based access control (RBAC) to secure APIs and finance operations.",
-      "Improved service resilience using Redis caching and Resilience4j Circuit Breaker and Retry patterns.",
-      "Integrated RabbitMQ for asynchronous service communication and Kafka for event-driven email workflows.",
-      "Developed and maintained Angular modules for finance workflows, validation, and journal generation.",
-      "Optimized SQL workflows, reducing manual effort by approximately 50% and saving 15+ hours per month-end cycle.",
-      "Performed root-cause analysis for 40+ production incidents and contributed to reliability improvements.",
-      "Wrote unit tests using JUnit and Mockito and supported application releases and production enhancements."
+      "Designed and developed 4+ Spring Boot microservices for enterprise finance workflows, enabling scalable distributed processing and reliable inter-service communication.",
+      "Engineered 20+ RESTful APIs using Spring Boot and Swagger/OpenAPI; implemented Spring Security, JWT, and RBAC with JUnit and Mockito test coverage.",
+      "Improved application performance and resilience using Redis caching and Resilience4j Circuit Breaker/Retry patterns, reducing latency and improving fault tolerance across distributed services.",
+      "Implemented event-driven asynchronous workflows using Kafka and RabbitMQ for background processing and inter-service communication, improving throughput and application responsiveness.",
+      "Developed a multithreaded retry-abort framework using ExecutorService and ThreadPoolExecutor, improving failed-job reprocessing efficiency by 50% and reducing manual production intervention.",
+      "Designed a scalable data processing framework with user-configurable column-based sorting and dynamic partition orchestration, executing partitions concurrently to optimize performance and resource utilization.",
+      "Upgraded the Angular application from v7 to v17, resolving migration issues, refactoring TypeScript components, and improving UI workflows using RxJS Observables and Promises.",
+      "Remediated 10+ security vulnerabilities identified through SAST, DAST, and SonarLint, strengthening application security and compliance.",
+      "Automated month-end financial reporting using Python and SQL-based data pipelines, eliminating manual effort and saving 15+ hours per reporting cycle.",
+      "Resolved 40+ production incidents through root-cause analysis, performance tuning, and defect remediation; contributed to Agile/Scrum releases and AWS EC2/S3 and Docker deployments.",
+      "Presented 3+ technical PoCs, conducted 10+ client training sessions, and mentored 3 junior developers on architecture, coding standards, and development practices."
     ]
   }
 ]
