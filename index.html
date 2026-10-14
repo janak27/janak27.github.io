@@ -1300,34 +1300,32 @@
 
 
                     shareButton.addEventListener('click', async () => {
-                        const slug = createBlogSlug(blog.slug || blog.title);
-                        const shareUrl = `${window.location.origin}${window.location.pathname}?blog=${encodeURIComponent(slug)}`;
+    const slug = createBlogSlug(blog.slug || blog.title);
+    const shareUrl = `${window.location.origin}${window.location.pathname}?blog=${encodeURIComponent(slug)}`;
 
-                        if (navigator.share) {
-                            try {
-                                await navigator.share({
-                                    title: blog.title || 'Blog post',
-                                    text: `Read "${blog.title || 'this blog post'}"`,
-                                    url: shareUrl
-                                });
-                                return;
-                            } catch (error) {
-                                if (error.name === 'AbortError') return;
-                                console.warn('Native sharing unavailable; trying clipboard.', error);
-                            }
-                        }
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                url: shareUrl
+            });
+            return;
+        } catch (error) {
+            if (error.name === 'AbortError') return;
+            console.warn('Native sharing unavailable; trying clipboard.', error);
+        }
+    }
 
-                        try {
-                            await navigator.clipboard.writeText(shareUrl);
-                            shareButton.innerHTML = '<i class="fas fa-check mr-1"></i> Link copied';
-                            setTimeout(() => {
-                                shareButton.innerHTML = '<i class="fas fa-share-alt mr-1"></i> Share';
-                            }, 2000);
-                        } catch (error) {
-                            window.prompt('Copy this blog link:', shareUrl);
-                        }
-                    });
+    try {
+        await navigator.clipboard.writeText(shareUrl);
+        shareButton.innerHTML = '<i class="fas fa-check mr-1"></i> Link copied';
 
+        setTimeout(() => {
+            shareButton.innerHTML = '<i class="fas fa-share-alt mr-1"></i> Share';
+        }, 2000);
+    } catch (error) {
+        window.prompt('Copy this blog link:', shareUrl);
+    }
+});
                     wrapper.append(titleRow, tags, preview, readMore, shareButton);
 
                     container.appendChild(wrapper);
