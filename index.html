@@ -1538,83 +1538,50 @@
 
 
         async function openSharedBlog() {
-
-            const params = new URLSearchParams(window.location.search);
-
-            const requestedSlug = params.get('blog');
-
-
-
+            const requestedSlug = new URLSearchParams(window.location.search).get('blog');
             if (!requestedSlug) return;
 
-
+            // URLSearchParams decodes the query value. Normalize both sides to
+            // tolerate punctuation, capitalization, and spacing differences.
+            const normalizeSlug = value => createBlogSlug(String(value || '').replace(/\\+/g, '-'));
+            const targetSlug = normalizeSlug(requestedSlug);
 
             try {
-
-                const response = await fetch('./blogs.json');
-
-
-
-                if (!response.ok) {
-
-                    throw new Error('Unable to load blogs.json');
-
-                }
-
-
-
-                const blogs = await response.json();
-
-
-
-                const blog = blogs.find(
-
-                    item => createBlogSlug(item.slug || item.title) === requestedSlug
-
+                // loadBlogs() has already populated loadedBlogs before this runs.
+                const blog = loadedBlogs.find(item =>
+                    normalizeSlug(item.slug || item.title) === targetSlug
                 );
 
-
-
                 if (blog) {
-
-                    openBlog(blog);
-
+                    // Render the article without adding a duplicate history entry.
+                    showBlogDetail(blog, false);
                 } else {
-
-                    console.error('Blog not found:', requestedSlug);
-
+                    console.error('Blog not found for URL slug:', targetSlug);
+                    showBlogsList(false);
                 }
-
             } catch (error) {
-
                 console.error('Unable to open shared blog:', error);
-
+                showBlogsList(false);
             }
-
         }
 
-
-
-        // Load dynamic content and start the typewriter effect.
-
-        document.addEventListener('DOMContentLoaded', async () => {
-
+        // Initialize even if this script runs after DOMContentLoaded.
+        async function initializePortfolio() {
             loadProjects();
-
             await loadExperience();
-
             await loadBlogs();
-
             await openSharedBlog();
-
             runTypewriter();
+        }
 
-        });
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePortfolio, { once: true });
+        } else {
+            initializePortfolio();
+        }
 
     </script>
 
 </body>
-
-
 
 </html>
