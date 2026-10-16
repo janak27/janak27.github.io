@@ -1,1585 +1,919 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="dark">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Janak Avhad | Portfolio</title>
-
-
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-
-
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
-
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
-
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
-
-    <link rel="manifest" href="/site.webmanifest">
-
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-
-
-    <script>
-
-        tailwind.config = {
-
-            darkMode: 'class',
-
-            theme: {
-
-                extend: {
-
-                    colors: {
-
-                        'text-color': '#1a1a1a',
-
-                        'accent-color': '#4a4a4a',
-
-                        'subtext-color': '#666666',
-
-                        'link-color': '#000000'
-
-                    },
-
-                    fontFamily: {
-
-                        mono: ['JetBrains Mono', 'monospace']
-
-                    },
-
-                    keyframes: {
-
-                        blink: {
-
-                            '0%, 100%': { opacity: '1' },
-
-                            '50%': { opacity: '0' }
-
-                        },
-
-                        fadeIn: {
-
-                            from: { opacity: '0', transform: 'translateY(10px)' },
-
-                            to: { opacity: '1', transform: 'translateY(0)' }
-
-                        }
-
-                    },
-
-                    animation: {
-
-                        blink: 'blink 1s step-end infinite',
-
-                        fadeIn: 'fadeIn 0.8s ease forwards'
-
-                    }
-
-                }
-
-            }
-
-        };
-
-
-
-        // Dark mode is enabled by default, before the page renders.
-
-        (() => {
-
-            const savedTheme = localStorage.getItem('theme');
-
-            if (savedTheme === null || savedTheme === 'dark') {
-
-                document.documentElement.classList.add('dark');
-
-            }
-
-        })();
-
-    </script>
-
-
-
-    <style>
-        html {
-
-            color-scheme: light;
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./favicon_io/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description"
+    content="Janak Avhad — Java Full Stack Engineer building backend services, microservices, and reliable applications.">
+  <title>Janak Avhad — Java Full Stack Engineer</title>
+
+  <!-- Set the theme before rendering to avoid a light-mode flash. Dark is the default. -->
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem("theme");
+        document.documentElement.classList.toggle("dark", saved !== "light");
+      } catch (_) {
+        document.documentElement.classList.add("dark");
+      }
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            ink: "#3d3d3d",
+            muted: "#7d8491",
+            line: "#d7dbe2",
+            link: "#2563eb",
+            accent: "#f59e0b",
+            night: "#111827",
+            nightSheet: "#111827"
+          },
+          fontFamily: {
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'Liberation Mono', 'monospace']
+          }
         }
-
-
-
-        html {
-
-            font-size: clamp(12px, 2.5vw, 16px);
-
-        }
-
-
-
-        html.dark {
-
-            color-scheme: dark;
-
-        }
-
-
-
-        html.dark body {
-
-            background-color: #000;
-
-            color: #fff;
-
-        }
-
-
-
-        .item-list>li {
-
-            position: relative;
-
-            padding-left: 1.2rem;
-
-        }
-
-
-
-        .item-list>li::before {
-
-            content: "—";
-
-            position: absolute;
-
-            left: 0;
-
-            color: #ccc;
-
-        }
-
-
-
-        html.dark .item-list>li::before {
-
-            color: #4b5563;
-
-        }
-
-
-
-        .fade-section:nth-child(2) {
-
-            animation-delay: 0.1s;
-
-        }
-
-
-
-        .fade-section:nth-child(3) {
-
-            animation-delay: 0.2s;
-
-        }
-
-
-
-        .fade-section:nth-child(4) {
-
-            animation-delay: 0.3s;
-
-        }
-
-
-
-        .fade-section:nth-child(5) {
-
-            animation-delay: 0.4s;
-
-        }
-
-
-
-        .fade-section:nth-child(6) {
-
-            animation-delay: 0.5s;
-
-        }
-
-
-
-        .fade-section:nth-child(7) {
-
-            animation-delay: 0.6s;
-
-        }
-
-
-
-        .cursor-custom {
-
-            display: inline-block;
-
-            width: 8px;
-
-            height: 1.2em;
-
-            background-color: #1a1a1a;
-
-            margin-left: 4px;
-
-            vertical-align: text-bottom;
-
-            animation: blink 1s step-end infinite;
-
-        }
-
-
-
-        html.dark .cursor-custom {
-
-            background-color: #fff;
-
-        }
-
-
-
-        /* Section navigation */
-
-        .section-tab {
-
-            position: relative;
-
-            flex-shrink: 0;
-
-            padding: 0.75rem 0;
-
-            font-size: 0.875rem;
-
-            white-space: nowrap;
-
-            transition: color 200ms ease;
-
-            cursor: pointer;
-
-        }
-
-
-
-        .section-tab:focus-visible {
-
-            outline: 2px solid currentColor;
-
-            outline-offset: 4px;
-
-            border-radius: 2px;
-
-        }
-
-
-
-        /* Inactive sections are completely removed from the layout. */
-
-        .portfolio-panel[hidden] {
-
-            display: none !important;
-
-        }
-
-
-
-        .portfolio-panel.active {
-
-            display: block;
-
-            animation: panelSlideIn 280ms ease both;
-
-        }
-
-
-
-        @keyframes panelSlideIn {
-
-            from {
-
-                opacity: 0;
-
-                transform: translateY(8px);
-
-            }
-
-
-
-            to {
-
-                opacity: 1;
-
-                transform: translateY(0);
-
-            }
-
-        }
-
-
-
-        #nav-indicator {
-
-            position: absolute;
-
-            bottom: -1px;
-
-            left: 0;
-
-            height: 2px;
-
-            width: 0;
-
-            background-color: #111;
-
-            transition: width 280ms ease, transform 280ms ease;
-
-            pointer-events: none;
-
-        }
-
-
-
-        html.dark #nav-indicator {
-
-            background-color: #fff;
-
-        }
-
-
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .portfolio-panel.active {
-
-                animation: none;
-
-            }
-
-
-
-            #nav-indicator,
-
-            .section-tab {
-
-                transition: none;
-
-            }
-
-
-
-            .cursor-custom {
-
-                animation: none;
-
-            }
-
-        }
-    </style>
-
+      }
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .nav-link {
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-link[aria-current="page"] {
+      color: #2563eb;
+      border-bottom-color: #f59e0b;
+    }
+
+    .dark .nav-link[aria-current="page"] {
+      color: #93c5fd;
+    }
+
+    .article-body p {
+      margin: 0 0 1rem;
+    }
+
+    .article-body h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 1.75rem 0 .75rem;
+    }
+
+    .article-body h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 1.4rem 0 .6rem;
+    }
+
+    .article-body ul {
+      list-style: disc;
+      padding-left: 1.4rem;
+      margin: .5rem 0 1rem;
+    }
+
+    .article-body ol {
+      list-style: decimal;
+      padding-left: 1.4rem;
+      margin: .5rem 0 1rem;
+    }
+
+    .article-body li {
+      margin: .3rem 0;
+    }
+
+    .article-body pre {
+      overflow-x: auto;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: .35rem;
+      background: #f3f4f6;
+      color: #111827;
+      font-size: .85rem;
+    }
+
+    .dark .article-body pre {
+      background: #1f2937;
+      color: #e5e7eb;
+    }
+
+    .article-body code {
+      font-family: inherit;
+    }
+
+    .article-body a {
+      color: #2563eb;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .dark .article-body a {
+      color: #93c5fd;
+    }
+  </style>
 </head>
 
-
-
 <body
-    class="bg-white text-text-color font-mono leading-relaxed text-base antialiased p-8 md:p-12 transition-colors duration-300 dark:bg-black dark:text-white">
-
-    <div class="max-w-[680px] mx-auto">
-
-
-
-        <header class="mb-2 pb-2 relative">
-
-            <button id="theme-toggle" type="button" aria-label="Toggle light and dark theme"
-                class="absolute top-0 right-0 text-subtext-color dark:text-gray-400 focus:outline-none">
-
-                <i id="theme-icon" class="fas fa-moon" aria-hidden="true"></i>
-
-            </button>
-
-            <div class="flex items-center gap-3">
-
-                <img src="/profile.png" alt="Janak Avhad"
-                    class="size-12 sm:size-14 md:size-16 shrink-0 rounded-xl object-cover border border-gray-300 dark:border-gray-700" />
-
-                <div>
-
-                    <h1 class="text-lg sm:text-xl font-bold">Janak Avhad</h1>
-
-                    <h2 class="text-md font-medium mb-2">
-
-                        <span id="typewriter-text"></span>
-
-                        <span class="cursor-custom" aria-hidden="true"></span>
-
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-
-
-
-
-
-            <div class="flex gap-8 text-sm mt-4">
-
-                <a href="https://github.com/janak27" aria-label="GitHub"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
-
-                    <i class="fab fa-github" aria-hidden="true"></i>
-
-                </a>
-
-
-
-                <a href="https://www.linkedin.com/in/janak-avhad/" aria-label="LinkedIn"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
-
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-
-                </a>
-
-
-
-                <a href="mailto:avhadjanak@gmail.com" aria-label="Email"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
-
-                    <i class="fas fa-envelope" aria-hidden="true"></i>
-
-                </a>
-
-
-
-                <a href="tel:+91-9372281138" aria-label="Phone"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
-
-                    <i class="fas fa-phone" aria-hidden="true"></i>
-
-                </a>
-
-
-
-                <a href="https://leetcode.com/u/avhadjanak/" aria-label="LeetCode"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
-
-                    <i class="fas fa-code" aria-hidden="true"></i>
-
-                </a>
-
-
-
-                <a href="https://medium.com/@avhadjanak" aria-label="Medium"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
-
-                    <i class="fab fa-medium" aria-hidden="true"></i>
-
-                </a>
-
-
-
-                <a href="https://drive.google.com/file/d/19-yLD_kIbYjPRj_s87VJHbytOZIbxiIx/view?usp=sharing"
-                    aria-label="Resume" target="_blank" rel="noopener noreferrer"
-                    class="text-subtext-color no-underline transition-colors duration-200 hover:text-link-color dark:text-gray-400 dark:hover:text-white flex items-center gap-1.5">
-
-                    <i class="fa fa-file" aria-hidden="true"></i>
-
-                </a>
-
-            </div>
-
-        </header>
-
-
-
-        <main>
-
-            <!-- Sliding section navigation -->
-
-            <nav id="section-nav"
-                class="relative flex gap-6 mb-10 border-b border-gray-200 dark:border-gray-800 overflow-x-auto"
-                role="tablist" aria-label="Portfolio sections">
-
-                <button type="button" role="tab" id="tab-experience" aria-controls="experience-panel"
-                    aria-selected="true" tabindex="0" data-target="experience-panel"
-                    class="section-tab text-gray-900 dark:text-white">
-
-                    Experience
-
-                </button>
-
-
-
-                <button type="button" role="tab" id="tab-projects" aria-controls="projects-panel" aria-selected="false"
-                    tabindex="-1" data-target="projects-panel" class="section-tab text-gray-500 dark:text-gray-400">
-
-                    Projects
-
-                </button>
-
-
-
-                <button type="button" role="tab" id="tab-blogs" aria-controls="blogs-panel" aria-selected="false"
-                    tabindex="-1" data-target="blogs-panel" class="section-tab text-gray-500 dark:text-gray-400">
-
-                    Blogs
-
-                </button>
-
-                <span id="nav-indicator" aria-hidden="true"></span>
-
-            </nav>
-
-
-
-            <!-- Experience -->
-
-            <!-- Experience: dynamically loaded from experience.json -->
-
-            <section id="experience-panel" class="portfolio-panel mb-12 space-y-6" role="tabpanel"
-                aria-labelledby="tab-experience">
-
-
-
-                <div id="experience-container">
-
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-
-                        Loading experience...
-
-                    </p>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- Projects: dynamically loaded from projects.json -->
-
-            <section id="projects-panel" class="portfolio-panel mb-12 space-y-6" role="tabpanel"
-                aria-labelledby="tab-projects" hidden>
-
-                <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
-
-                    Projects
-
-                </h3>
-
-
-
-                <div id="projects-container">
-
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Loading projects...</p>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- Blogs: dynamically loaded from blogs.json -->
-
-            <section id="blogs-panel" class="portfolio-panel mb-12 space-y-6" role="tabpanel"
-                aria-labelledby="tab-blogs" hidden>
-
-                <h3 class="text-xs font-medium opacity-60 tracking-wide dark:text-gray-400">
-
-                    Writing &amp; Thoughts (other than Medium)
-
-                </h3>
-
-
-
-                <div id="blogs-container">
-
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Loading blog posts...</p>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- Full blog article view; shown when a blog title is selected. -->
-
-            <section id="blog-detail-panel" class="portfolio-panel mb-12 space-y-6" role="region"
-                aria-labelledby="blog-detail-title" hidden>
-
-                <button id="back-to-blogs" type="button"
-                    class="text-sm text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors">
-
-                    <i class="fas fa-arrow-left mr-2" aria-hidden="true"></i>Back to blogs
-
-                </button>
-
-                <article class="space-y-5">
-
-                    <div>
-
-                        <p id="blog-detail-meta" class="font-mono text-xs text-gray-500 dark:text-gray-400 mb-3"></p>
-
-                        <h2 id="blog-detail-title" class="text-2xl font-semibold leading-snug"></h2>
-
-                        <p id="blog-detail-tags" class="font-mono text-xs text-gray-500 dark:text-gray-400 mt-3"></p>
-
-                    </div>
-
-                    <div id="blog-detail-content" class="space-y-4 text-sm leading-7 text-gray-700 dark:text-gray-300">
-
-                    </div>
-
-                </article>
-
-            </section>
-
-        </main>
-
-
-
-        <footer class="mt-16 pt-4 border-t border-gray-200 text-center dark:border-gray-800">
-
-            <p class="font-mono text-xs text-subtext-color dark:text-gray-400">
-
-                Created by Janak Avhad © 2025
-
-            </p>
-
-        </footer>
-
-    </div>
-
-
-
-    <script>
-
-        // --- Dark Mode Logic ---
-
-        const themeToggle = document.getElementById('theme-toggle');
-
-        const htmlElement = document.documentElement;
-
-        const themeIcon = document.getElementById('theme-icon');
-
-
-
-        function applyTheme() {
-
-            const savedTheme = localStorage.getItem('theme');
-
-            const isDark = savedTheme === null || savedTheme === 'dark';
-
-
-
-            htmlElement.classList.toggle('dark', isDark);
-
-            themeIcon.classList.toggle('fa-moon', isDark);
-
-            themeIcon.classList.toggle('fa-sun', !isDark);
-
-            themeToggle.setAttribute(
-
-                'aria-label',
-
-                isDark ? 'Switch to light mode' : 'Switch to dark mode'
-
-            );
-
-
-
-            if (savedTheme === null) {
-
-                localStorage.setItem('theme', 'dark');
-
-            }
-
-        }
-
-
-
-        themeToggle.addEventListener('click', () => {
-
-            const isDark = htmlElement.classList.toggle('dark');
-
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-
-
-
-            themeIcon.classList.toggle('fa-moon', isDark);
-
-            themeIcon.classList.toggle('fa-sun', !isDark);
-
-            themeToggle.setAttribute(
-
-                'aria-label',
-
-                isDark ? 'Switch to light mode' : 'Switch to dark mode'
-
-            );
-
-        });
-
-
-
-        applyTheme();
-
-
-
-        // --- Sliding Navbar / Single-Section Navigation ---
-
-        const sectionNav = document.getElementById('section-nav');
-
-        const navTabs = Array.from(sectionNav.querySelectorAll('.section-tab'));
-
-        const navIndicator = document.getElementById('nav-indicator');
-
-
-
-        function moveNavIndicator(tab) {
-
-            navIndicator.style.width = `${tab.offsetWidth}px`;
-
-            navIndicator.style.transform = `translateX(${tab.offsetLeft}px)`;
-
-        }
-
-
-
-        function activateSection(tab, moveFocus = false) {
-
-            const targetId = tab.dataset.target;
-
-            const targetPanel = document.getElementById(targetId);
-
-
-
-            if (!targetPanel) return;
-
-
-
-            // Hide every section before showing the selected one.
-
-            document.querySelectorAll('.portfolio-panel').forEach(panel => {
-
-                panel.classList.remove('active');
-
-                panel.hidden = true;
-
-            });
-
-
-
-            targetPanel.hidden = false;
-
-            targetPanel.classList.add('active');
-
-
-
-            // Update selected tab styling and accessibility attributes.
-
-            navTabs.forEach(item => {
-
-                const selected = item === tab;
-
-
-
-                item.setAttribute('aria-selected', String(selected));
-
-                item.setAttribute('tabindex', selected ? '0' : '-1');
-
-
-
-                item.classList.toggle('text-gray-900', selected);
-
-                item.classList.toggle('dark:text-white', selected);
-
-                item.classList.toggle('text-gray-500', !selected);
-
-                item.classList.toggle('dark:text-gray-400', !selected);
-
-            });
-
-
-
-            moveNavIndicator(tab);
-
-
-
-            if (moveFocus) {
-
-                tab.focus();
-
-            }
-
-        }
-
-
-
-        navTabs.forEach((tab, index) => {
-
-            tab.addEventListener('click', () => activateSection(tab));
-
-
-
-            // Keyboard support for tab-style navigation.
-
-            tab.addEventListener('keydown', event => {
-
-                let nextIndex = index;
-
-
-
-                if (event.key === 'ArrowRight') {
-
-                    nextIndex = (index + 1) % navTabs.length;
-
-                } else if (event.key === 'ArrowLeft') {
-
-                    nextIndex = (index - 1 + navTabs.length) % navTabs.length;
-
-                } else if (event.key === 'Home') {
-
-                    nextIndex = 0;
-
-                } else if (event.key === 'End') {
-
-                    nextIndex = navTabs.length - 1;
-
-                } else {
-
-                    return;
-
-                }
-
-
-
-                event.preventDefault();
-
-                activateSection(navTabs[nextIndex], true);
-
-            });
-
-        });
-
-
-
-        // Initialize the default active section.
-
-        activateSection(navTabs[0]);
-
-
-
-        // Reposition the underline when the window is resized.
-
-        window.addEventListener('resize', () => {
-
-            const activeTab = navTabs.find(
-
-                tab => tab.getAttribute('aria-selected') === 'true'
-
-            );
-
-
-
-            if (activeTab) moveNavIndicator(activeTab);
-
-        });
-
-
-
-        // Position the underline after fonts and layout have loaded.
-
-        requestAnimationFrame(() => moveNavIndicator(navTabs[0]));
-
-
-
-        async function loadExperience() {
-
-            const container = document.getElementById("experience-container");
-
-
-
-            if (!container) return;
-
-
-
-            try {
-
-                const response = await fetch("./experience.json");
-
-
-
-                if (!response.ok) {
-
-                    throw new Error("Failed to load experience.json");
-
-                }
-
-
-
-                const experiences = await response.json();
-
-
-
-                container.innerHTML = experiences.map(exp => `
-
-      <article class="mb-8">
-
-        <div class="flex flex-col sm:flex-row sm:justify-between gap-2">
-
+  class="min-h-screen bg-white text-[#3d3d3d] dark:bg-gray-900 dark:text-gray-200 font-mono text-[13px] leading-[1.65]">
+  <main class="w-full min-h-screen px-4 py-6 sm:px-6 sm:py-8">
+    <article class="mx-auto w-full max-w-[650px]" aria-label="Janak Avhad portfolio">
+      <nav class="mb-6 flex items-center gap-0 overflow-x-auto border-b-2 border-[#d7dbe2] dark:border-gray-700"
+        aria-label="Primary navigation">
+        <a class="nav-link shrink-0 px-3 py-2 text-xs text-gray-500 dark:text-gray-400" href="#home"
+          data-section-link="home">Janak Avhad</a>
+        <a class="nav-link shrink-0 px-3 py-2 text-xs text-gray-500 dark:text-gray-400" href="#projects"
+          data-section-link="projects">Projects</a>
+        <a class="nav-link shrink-0 px-3 py-2 text-xs text-gray-500 dark:text-gray-400" href="#writing"
+          data-section-link="writing">Blogs</a>
+        <button id="theme-toggle" type="button"
+          class="ml-auto shrink-0 px-3 py-2 text-xs text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white"
+          aria-label="Switch to light mode" title="Toggle light/dark mode"><span id="theme-icon"
+            aria-hidden="true">☼</span><span class="ml-1 hidden sm:inline">Theme</span></button>
+      </nav>
+
+      <header id="home" class="pb-5">
+        <!-- Profile -->
+        <div class="flex items-center  gap-4">
+          <img class="h-[110px] w-[110px] shrink-0 rounded object-cover" src="./profile.png" alt="Janak Avhad"
+            loading="eager" onerror="this.hidden=true" />
           <div>
+            <h1 class="text-[23px] font-bold leading-tight tracking-tight">
+              Janak Avhad
+            </h1>
 
-            <h3 class="text-xl font-semibold">${escapeHTML(exp.role)}</h3>
-
-            <p class="text-sm opacity-80">
-
-              ${escapeHTML(exp.company)} · ${escapeHTML(exp.location)}
-
+            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Java Full Stack Engineer
             </p>
 
+            <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              Pune, Maharashtra, India
+            </p>
           </div>
 
 
-
-          <p class="text-sm opacity-70">
-
-            ${escapeHTML(exp.startDate)} – ${escapeHTML(exp.endDate)}
-
-          </p>
-
         </div>
 
+        <!-- Introduction -->
+        <p class="mt-4 max-w-[590px] text-sm leading-6">
+          I build backend services and full-stack applications using Java,
+          Spring Boot, microservices, and Angular. I work at Tata Consultancy
+          Services on enterprise finance workflows, REST APIs, and production
+          reliability.
+        </p>
 
+        <p class="mt-3">
+          Links:
+          <a class="text-link hover:underline dark:text-blue-300" href="mailto:avhadjanak@gmail.com">[Email]</a>
+          <a class="text-link hover:underline dark:text-blue-300" href="https://www.linkedin.com/in/janak-avhad"
+            target="_blank" rel="noopener noreferrer">[LinkedIn]</a>
+          <a class="text-link hover:underline dark:text-blue-300" href="https://github.com/janak27" target="_blank"
+            rel="noopener noreferrer">[GitHub]</a>
+          <a class="text-link hover:underline dark:text-blue-300" href="https://leetcode.com/u/avhadjanak/"
+            target="_blank" rel="noopener noreferrer">[LeetCode]</a>
+          <a class="text-link hover:underline dark:text-blue-300" href="https://medium.com/@avhadjanak" target="_blank"
+            rel="noopener noreferrer">[Medium]</a>
+          <a class="text-link hover:underline dark:text-blue-300"
+            href="https://drive.google.com/file/d/19-yLD_kIbYjPRj_s87VJHbytOZIbxiIx/view?usp=sharing" target="_blank"
+            rel="noopener noreferrer">[Resume]</a>
+        </p>
 
-        ${exp.project ? `
+        <!-- Current Focus -->
+        <section class="mt-7">
+          <h2 class="mb-2 text-[18px] font-bold leading-tight">
+            Current Focus
+          </h2>
 
-          <p class="mt-3 text-sm font-medium">
+          <div class="space-y-3 text-sm leading-6">
+            <p>
+              I'm interested in distributed systems, event-driven architecture,
+              API design, and building reliable backend services that scale.
+            </p>
 
-            Project: ${escapeHTML(exp.project)}
+            <p>
+              I'm building an event-driven transaction processing system with
+              Java, Spring Boot, Apache Kafka, PostgreSQL, and Redis to deepen
+              my understanding of asynchronous processing, retries, and data
+              consistency.
+            </p>
+          </div>
+        </section>
 
+        <!-- Technical Interests -->
+        <section class="mt-7">
+          <h2 class="mb-2 text-[18px] font-bold leading-tight">
+            Technical Interests
+          </h2>
+
+          <p class="text-sm leading-6">
+            Java · Spring Boot · Microservices · Distributed Systems ·
+            Apache Kafka · Redis · REST APIs · SQL · System Design · AWS
           </p>
-
-        ` : ""}
-
-
-
-        <ul class="mt-4 list-disc pl-5 space-y-2">
-
-          ${(exp.bullets || []).map(bullet => `
-
-            <li class="text-sm leading-relaxed">
-
-              ${escapeHTML(bullet)}
-
-            </li>
-
-          `).join("")}
-
-        </ul>
-
-      </article>
-
-    `).join("");
-
-            } catch (error) {
-
-                console.error("Error loading experience:", error);
-
-                container.innerHTML = `
-
-      <p class="text-sm opacity-70">
-
-        Unable to load experience details.
-
-      </p>
-
-    `;
-
-            }
-
-        }
-
-
-
-        function escapeHTML(value = "") {
-
-            return String(value).replace(/[&<>"']/g, char => ({
-
-                "&": "&amp;",
-
-                "<": "&lt;",
-
-                ">": "&gt;",
-
-                '"': "&quot;",
-
-                "'": "&#39;"
-
-            })[char]);
-
-        }
-
-
-
-
-
-        // --- Dynamic Project Loader ---
-
-        async function loadProjects() {
-
-            const container = document.getElementById('projects-container');
-
-
-
-            try {
-
-                const response = await fetch('./projects.json');
-
-
-
-                if (!response.ok) {
-
-                    throw new Error('Could not load projects.json');
-
-                }
-
-
-
-                const projects = await response.json();
-
-
-
-                if (!Array.isArray(projects)) {
-
-                    throw new Error('projects.json must contain an array');
-
-                }
-
-
-
-                container.replaceChildren();
-
-
-
-                if (projects.length === 0) {
-
-                    container.innerHTML =
-
-                        '<p class="text-sm text-gray-500 dark:text-gray-400">No projects available yet.</p>';
-
-                    return;
-
-                }
-
-
-
-                projects.forEach(project => {
-
-                    const wrapper = document.createElement('div');
-
-                    wrapper.className = 'mb-8';
-
-
-
-                    const titleRow = document.createElement('div');
-
-                    titleRow.className =
-
-                        'flex justify-between items-baseline flex-wrap mb-1';
-
-
-
-                    const link = document.createElement('a');
-
-                    link.href = project.link || '#';
-
-                    link.target = '_blank';
-
-                    link.rel = 'noopener noreferrer';
-
-                    link.className =
-
-                        'font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300 dark:hover:text-white dark:decoration-gray-700';
-
-                    link.textContent = project.title || 'Untitled project';
-
-
-
-                    titleRow.appendChild(link);
-
-
-
-                    const details = document.createElement('div');
-
-                    details.className = 'text-sm text-accent-color mt-1';
-
-
-
-                    const tags = document.createElement('span');
-
-                    tags.className =
-
-                        'font-mono text-xs text-subtext-color block dark:text-gray-400';
-
-                    tags.textContent = project.tags || '';
-
-
-
-                    details.appendChild(tags);
-
-                    wrapper.append(titleRow, details);
-
-                    container.appendChild(wrapper);
-
-                });
-
-            } catch (error) {
-
-                console.error('Failed to load projects:', error);
-
-                container.innerHTML =
-
-                    '<p class="text-sm text-red-500 dark:text-red-400">Error loading projects. Check that projects.json exists and the site is served over HTTP.</p>';
-
-            }
-
-        }
-
-
-
-        // --- Dynamic Blog Loader ---
-
-        let loadedBlogs = [];
-
-        async function loadBlogs() {
-
-            const container = document.getElementById('blogs-container');
-
-
-
-            try {
-
-                const response = await fetch('./blogs.json');
-
-                if (!response.ok) throw new Error('Could not load blogs.json');
-
-
-
-                const blogs = await response.json();
-
-                if (!Array.isArray(blogs)) throw new Error('blogs.json must contain an array');
-                loadedBlogs = blogs;
-
-                container.replaceChildren();
-
-
-
-                if (blogs.length === 0) {
-
-                    container.innerHTML =
-
-                        '<p class="text-sm text-gray-500 dark:text-gray-400">No blog posts available yet.</p>';
-
-                    return;
-
-                }
-
-
-
-                blogs.forEach(blog => {
-
-                    const wrapper = document.createElement('article');
-
-                    wrapper.className = 'mb-8 pb-6 border-b border-gray-200 dark:border-gray-800 last:border-b-0';
-
-
-
-                    const titleRow = document.createElement('div');
-
-                    titleRow.className = 'flex justify-between items-baseline flex-wrap gap-x-4 gap-y-1 mb-2';
-
-
-
-                    const titleButton = document.createElement('button');
-
-                    titleButton.type = 'button';
-
-                    titleButton.className = 'text-left font-semibold text-base hover:text-link-color hover:underline underline-offset-4 decoration-gray-300 dark:hover:text-white dark:decoration-gray-700';
-
-                    titleButton.textContent = blog.title || 'Untitled post';
-
-                    titleButton.addEventListener('click', () => openBlog(blog));
-
-                    titleRow.appendChild(titleButton);
-
-
-
-                    if (blog.date) {
-
-                        const date = document.createElement('span');
-
-                        date.className = 'font-mono text-xs text-gray-500 dark:text-gray-400';
-
-                        date.textContent = blog.date;
-
-                        titleRow.appendChild(date);
-
-                    }
-
-
-
-                    const tags = document.createElement('p');
-
-                    tags.className = 'font-mono text-xs text-gray-500 dark:text-gray-400 mb-2';
-
-                    tags.textContent = blog.tags || blog.category || '';
-
-
-
-                    const rawContent = blog.content || blog.body || blog.description || '';
-
-                    const preview = document.createElement('p');
-
-                    preview.className = 'text-sm text-gray-600 dark:text-gray-400 leading-6';
-
-                    const plainPreview = String(rawContent).replace(/\s+/g, ' ').trim();
-
-                    preview.textContent = plainPreview
-
-                        ? (plainPreview.length > 180 ? plainPreview.slice(0, 180).trimEnd() + '…' : plainPreview)
-
-                        : 'Read the full post.';
-
-
-
-                    const readMore = document.createElement('button');
-
-                    readMore.type = 'button';
-
-                    readMore.className = 'mt-3 text-sm font-medium underline underline-offset-4 decoration-gray-300 hover:text-black dark:decoration-gray-700 dark:hover:text-white';
-
-                    readMore.textContent = 'Read article →';
-
-                    readMore.addEventListener('click', () => openBlog(blog));
-
-
-
-                    const shareButton = document.createElement('button');
-
-                    shareButton.type = 'button';
-
-                    shareButton.className =
-
-                        'ml-4 mt-3 text-sm text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white';
-
-
-
-                    shareButton.innerHTML =
-
-                        '<i class="fas fa-share-alt mr-1"></i> Share';
-
-
-
-                    shareButton.addEventListener('click', async () => {
-    const slug = createBlogSlug(blog.slug || blog.title);
-    const shareUrl = `${window.location.origin}${window.location.pathname}?blog=${encodeURIComponent(slug)}`;
-
-    if (navigator.share) {
-        try {
-            await navigator.share({
-                url: shareUrl
-            });
-            return;
-        } catch (error) {
-            if (error.name === 'AbortError') return;
-            console.warn('Native sharing unavailable; trying clipboard.', error);
-        }
+        </section>
+        <!-- Selected Work -->
+        <section class="mt-7">
+          <h2 class="mb-2 text-[18px] font-bold leading-tight">
+            Selected Projects
+          </h2>
+
+          <div class="space-y-3 text-sm leading-6">
+            <p>
+              <a class="text-link hover:underline dark:text-blue-300" href="#projects" data-section-link="projects">
+                View all projects →
+              </a>
+            </p>
+          </div>
+        </section>
+
+        <!-- Writing -->
+        <section class="mt-7">
+          <h2 class="mb-2 text-[18px] font-bold leading-tight">
+            Recent Writing
+          </h2>
+
+          <p class="mt-2">
+            <a class="text-link hover:underline dark:text-blue-300" href="#writing" data-section-link="writing">
+              Read my articles →
+            </a>
+          </p>
+        </section>
+
+        <!-- Personal Note -->
+        <p class="mt-7 text-xs text-gray-500 dark:text-gray-400">
+          Building, learning, and sharing along the way.
+        </p>
+      </header>
+
+      <section id="projects" class="pt-6">
+        <h2 class="mb-3 text-[22px] font-bold leading-tight sm:text-[21px]">Selected Work</h2>
+        <div id="projects-container" class="space-y-4">
+          <p class="text-sm text-gray-500 dark:text-gray-400">Loading projects...</p>
+        </div>
+      </section>
+
+      <section id="writing" class="pt-6">
+        <h2 class="mb-3 text-[22px] font-bold leading-tight sm:text-[21px]">Writing</h2>
+        <div id="blogs-container" class="space-y-5">
+          <p class="text-sm text-gray-500 dark:text-gray-400">Loading blog posts...</p>
+        </div>
+      </section>
+
+      <section id="blog-detail-panel" class="pt-6" hidden aria-labelledby="blog-detail-title">
+        <button id="back-to-blogs" type="button"
+          class="mb-5 text-sm text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white">← Back to
+          writing</button>
+        <article>
+          <p id="blog-detail-meta" class="mb-3 text-xs text-gray-500 dark:text-gray-400"></p>
+          <h2 id="blog-detail-title" class="text-xl font-bold leading-snug"></h2>
+          <p id="blog-detail-tags" class="mt-3 text-xs text-gray-500 dark:text-gray-400"></p>
+          <p id="blog-detail-description" class="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-300"></p>
+          <div id="blog-detail-content" class="article-body mt-6 text-sm leading-7"></div>
+          <div class="mt-8 flex flex-wrap gap-4 border-t border-gray-200 pt-4 text-xs dark:border-gray-700">
+            <button id="share-blog" type="button" class="text-link hover:underline dark:text-blue-300">Copy share
+              link</button>
+            <button id="copy-blog-url" type="button" class="text-link hover:underline dark:text-blue-300">Copy
+              URL</button>
+          </div>
+          <p id="share-status" class="mt-2 text-xs text-gray-500 dark:text-gray-400" aria-live="polite"></p>
+        </article>
+      </section>
+
+
+
+      <footer
+        class="mt-12 border-t border-[#d7dbe2] pt-4 text-center text-xs text-gray-500 dark:border-gray-700 dark:text-gray-400">
+        Created by Janak Avhad · © <span id="year"></span>
+      </footer>
+    </article>
+  </main>
+
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let loadedBlogs = [];
+    let currentBlog = null;
+
+    function addText(parent, tag, value, className = "") {
+      const element = document.createElement(tag);
+      element.textContent = value == null ? "" : String(value);
+      if (className) element.className = className;
+      parent.appendChild(element);
+      return element;
     }
 
-    try {
-        await navigator.clipboard.writeText(shareUrl);
-        shareButton.innerHTML = '<i class="fas fa-check mr-1"></i> Link copied';
+    function makeLink(label, href, className = "") {
+      const link = document.createElement("a");
+      link.textContent = label;
+      link.href = href || "#";
+      link.className = className;
 
-        setTimeout(() => {
-            shareButton.innerHTML = '<i class="fas fa-share-alt mr-1"></i> Share';
-        }, 2000);
-    } catch (error) {
-        window.prompt('Copy this blog link:', shareUrl);
+      if (/^https?:\/\//i.test(link.href)) {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      }
+
+      return link;
     }
-});
-                    wrapper.append(titleRow, tags, preview, readMore, shareButton);
 
-                    container.appendChild(wrapper);
+    function setTheme(theme) {
+      const dark = theme !== "light";
+      document.documentElement.classList.toggle("dark", dark);
 
-                });
+      try {
+        localStorage.setItem("theme", dark ? "dark" : "light");
+      } catch (_) { }
 
-            } catch (error) {
+      $("theme-toggle").setAttribute(
+        "aria-label",
+        dark ? "Switch to light mode" : "Switch to dark mode"
+      );
+      $("theme-icon").textContent = dark ? "☼" : "☾";
+    }
 
-                console.error('Failed to load blogs:', error);
+    $("theme-toggle").addEventListener("click", () => {
+      setTheme(
+        document.documentElement.classList.contains("dark") ? "light" : "dark"
+      );
+    });
 
-                container.innerHTML =
+    setTheme(
+      document.documentElement.classList.contains("dark") ? "dark" : "light"
+    );
 
-                    '<p class="text-sm text-red-500 dark:text-red-400">Error loading blog posts. Check that blogs.json exists and the site is served over HTTP.</p>';
+    const sectionIds = ["home", "projects", "writing"];
 
-            }
+    function showOnlySection(sectionId) {
+      if (!sectionIds.includes(sectionId)) sectionId = "home";
 
+      sectionIds.forEach((id) => {
+        const section = $(id);
+        if (section) section.hidden = id !== sectionId;
+      });
+
+      if (sectionId !== "writing") {
+        $("blog-detail-panel").hidden = true;
+      } else if (!currentBlog) {
+        $("blogs-container").hidden = false;
+        $("blog-detail-panel").hidden = true;
+        $("writing").querySelector("h2").hidden = false;
+      }
+
+      document.querySelectorAll("[data-section-link]").forEach((link) => {
+        link.removeAttribute("aria-current");
+        if (link.dataset.sectionLink === sectionId) {
+          link.setAttribute("aria-current", "page");
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function blogSlug(blog) {
+      if (blog.slug) return String(blog.slug);
+
+      return String(blog.title || "post")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    function blogText(blog) {
+      const value = blog.content || blog.body || blog.description || "";
+
+      if (Array.isArray(value)) {
+        return value
+          .map((item) =>
+            typeof item === "string" ? item : item.text || ""
+          )
+          .join("\n\n");
+      }
+
+      return String(value);
+    }
+
+    function makePreview(content, max = 210) {
+      const plain = String(content)
+        .replace(/```[\s\S]*?```/g, " code example ")
+        .replace(/!\[([^\]]*)\]\([^)]+\)/g, " image ")
+        .replace(/[#>*_`[\]()!-]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      return plain.length > max
+        ? plain.slice(0, max).trimEnd() + "…"
+        : plain || "Read the full article.";
+    }
+
+    function renderArticleContent(raw, container) {
+      container.replaceChildren();
+
+      const lines = String(raw || "").replace(/\r\n/g, "\n").split("\n");
+      let paragraph = [];
+      let list = null;
+      let inCode = false;
+      let codeLines = [];
+
+      const flushParagraph = () => {
+        if (!paragraph.length) return;
+
+        addText(container, "p", paragraph.join(" ").trim());
+        paragraph = [];
+      };
+
+      const flushList = () => {
+        list = null;
+      };
+
+      const flushCode = () => {
+        const pre = document.createElement("pre");
+        const code = document.createElement("code");
+
+        code.textContent = codeLines.join("\n");
+        pre.appendChild(code);
+        container.appendChild(pre);
+
+        codeLines = [];
+        inCode = false;
+      };
+
+      const renderImage = (alt, src) => {
+        const figure = document.createElement("figure");
+        figure.className = "my-5";
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = alt;
+        img.loading = "lazy";
+        img.className = "w-full rounded-lg object-cover";
+        img.onerror = () => figure.remove();
+
+        figure.appendChild(img);
+
+        if (alt) {
+          addText(
+            figure,
+            "figcaption",
+            alt,
+            "mt-2 text-xs text-gray-500 dark:text-gray-400"
+          );
         }
 
+        container.appendChild(figure);
+      };
 
+      for (const line of lines) {
+        if (line.trim().startsWith("```")) {
+          flushParagraph();
+          flushList();
 
-        function createBlogSlug(title = '') {
+          if (inCode) {
+            flushCode();
+          } else {
+            inCode = true;
+          }
 
-            return String(title)
-
-                .toLowerCase()
-
-                .trim()
-
-                .replace(/[^a-z0-9]+/g, '-')
-
-                .replace(/^-+|-+$/g, '');
-
+          continue;
         }
 
-
-
-        function showBlogDetail(blog, updateHistory = true) {
-            const slug = createBlogSlug(blog.slug || blog.title);
-
-            if (updateHistory) {
-                history.pushState({ blog: slug }, '', `${window.location.pathname}?blog=${encodeURIComponent(slug)}`);
-            }
-
-            document.querySelectorAll('.portfolio-panel').forEach(panel => {
-                panel.classList.remove('active');
-                panel.hidden = true;
-            });
-
-            const detailPanel = document.getElementById('blog-detail-panel');
-            detailPanel.hidden = false;
-            detailPanel.classList.add('active');
-
-            // Keep the Blogs tab selected while an article is open.
-            const blogsTab = navTabs.find(tab => tab.dataset.target === 'blogs-panel');
-            if (blogsTab) {
-                navTabs.forEach(tab => {
-                    const selected = tab === blogsTab;
-                    tab.setAttribute('aria-selected', String(selected));
-                    tab.setAttribute('tabindex', selected ? '0' : '-1');
-                });
-                moveNavIndicator(blogsTab);
-            }
-
-            document.getElementById('blog-detail-title').textContent = blog.title || 'Untitled post';
-            document.getElementById('blog-detail-meta').textContent = blog.date || '';
-            document.getElementById('blog-detail-tags').textContent = blog.tags || blog.category || '';
-
-            const content = document.getElementById('blog-detail-content');
-            content.replaceChildren();
-            const articleText = String(blog.content || blog.body || blog.description || '').trim();
-
-            if (articleText) {
-                articleText.split(/\n\s*\n/).forEach(paragraphText => {
-                    if (!paragraphText.trim()) return;
-                    const paragraph = document.createElement('p');
-                    paragraph.textContent = paragraphText.trim();
-                    content.appendChild(paragraph);
-                });
-            } else {
-                const message = document.createElement('p');
-                message.textContent = 'The full article text has not been added to blogs.json yet.';
-                content.appendChild(message);
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (inCode) {
+          codeLines.push(line);
+          continue;
         }
 
-        function openBlog(blog, updateHistory = true) {
-            showBlogDetail(blog, updateHistory);
+        if (!line.trim()) {
+          flushParagraph();
+          flushList();
+          continue;
         }
 
-        function showBlogsList(updateHistory = true) {
-            document.querySelectorAll('.portfolio-panel').forEach(panel => {
-                panel.classList.remove('active');
-                panel.hidden = true;
-            });
+        const imageMatch = line
+          .trim()
+          .match(/^!\[([^\]]*)\]\((https?:\/\/[^ )]+)\)$/);
 
-            const blogsPanel = document.getElementById('blogs-panel');
-            blogsPanel.hidden = false;
-            blogsPanel.classList.add('active');
-
-            const blogsTab = navTabs.find(tab => tab.dataset.target === 'blogs-panel');
-            if (blogsTab) {
-                navTabs.forEach(tab => {
-                    const selected = tab === blogsTab;
-                    tab.setAttribute('aria-selected', String(selected));
-                    tab.setAttribute('tabindex', selected ? '0' : '-1');
-                });
-                moveNavIndicator(blogsTab);
-            }
-
-            if (updateHistory) {
-                history.pushState({}, '', window.location.pathname);
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (imageMatch) {
+          flushParagraph();
+          flushList();
+          renderImage(imageMatch[1], imageMatch[2]);
+          continue;
         }
 
-        function returnToBlogs() {
-            showBlogsList(true);
+        const heading = line.match(/^(#{2,3})\s+(.+)$/);
+
+        if (heading) {
+          flushParagraph();
+          flushList();
+          addText(
+            container,
+            heading[1].length === 2 ? "h2" : "h3",
+            heading[2]
+          );
+          continue;
         }
 
-        document.getElementById('back-to-blogs').addEventListener('click', returnToBlogs);
+        const item = line.match(/^\s*[-*]\s+(.+)$/);
 
-        window.addEventListener('popstate', () => {
-            const requestedSlug = new URLSearchParams(window.location.search).get('blog');
-            if (requestedSlug) {
-                const blog = loadedBlogs.find(item => createBlogSlug(item.slug || item.title) === requestedSlug);
-                if (blog) {
-                    openBlog(blog, false);
-                    return;
-                }
-            }
-            showBlogsList(false);
+        if (item) {
+          flushParagraph();
+
+          if (!list) {
+            list = document.createElement("ul");
+            list.className = "list-disc pl-6 my-3";
+            container.appendChild(list);
+          }
+
+          addText(list, "li", item[1]);
+          continue;
+        }
+
+        flushList();
+        paragraph.push(line.trim());
+      }
+
+      flushParagraph();
+
+      if (inCode) flushCode();
+
+      if (!container.childElementCount) {
+        addText(container, "p", "The article content is empty.");
+      }
+    }
+
+    async function loadProjects() {
+      const container = $("projects-container");
+
+      try {
+        const response = await fetch("./projects.json");
+        if (!response.ok) throw new Error("Could not load projects.json");
+
+        const projects = await response.json();
+        if (!Array.isArray(projects)) {
+          throw new Error("projects.json must contain an array");
+        }
+
+        container.replaceChildren();
+
+        if (!projects.length) {
+          addText(
+            container,
+            "p",
+            "No projects added yet.",
+            "text-sm text-gray-500 dark:text-gray-400"
+          );
+          return;
+        }
+
+        projects.forEach((project) => {
+          const wrapper = document.createElement("article");
+          wrapper.className = "text-sm";
+
+          wrapper.appendChild(
+            makeLink(
+              project.title || "Untitled project",
+              project.link || "#",
+              "font-bold text-[#3d3d3d] hover:underline underline-offset-4 dark:text-gray-100"
+            )
+          );
+
+          if (project.date || project.year) {
+            addText(
+              wrapper,
+              "span",
+              " · " + (project.date || project.year),
+              "ml-2 text-xs text-gray-500 dark:text-gray-400"
+            );
+          }
+
+          const tags =
+            project.tags || project.techStack || project.technologies;
+
+          if (tags) {
+            addText(
+              wrapper,
+              "p",
+              Array.isArray(tags) ? tags.join(" · ") : tags,
+              "mt-1 text-xs text-gray-500 dark:text-gray-400"
+            );
+          }
+
+          const description =
+            project.snippet || project.description || project.summary;
+
+          if (description) {
+            addText(
+              wrapper,
+              "p",
+              description,
+              "mt-2 leading-6 text-gray-700 dark:text-gray-300"
+            );
+          }
+
+          container.appendChild(wrapper);
         });
+      } catch (error) {
+        console.error(error);
+        container.replaceChildren();
 
-        // --- Typewriter Effect --
+        addText(
+          container,
+          "p",
+          "Unable to load projects. Check projects.json and serve the site over HTTP.",
+          "text-sm text-red-500 dark:text-red-400"
+        );
+      }
+    }
 
-        const phrases = [
+    function renderBlogs() {
+      const container = $("blogs-container");
+      container.replaceChildren();
 
-            'I build things that scale.',
+      if (!loadedBlogs.length) {
+        addText(
+          container,
+          "p",
+          "No blog posts available yet.",
+          "text-sm text-gray-500 dark:text-gray-400"
+        );
+        return;
+      }
 
-            'Java. Angular. Distributed systems.',
+      loadedBlogs.forEach((blog) => {
+        const article = document.createElement("article");
+        article.className =
+          "border-b border-[#d7dbe2] pb-5 last:border-0 dark:border-gray-700";
 
-            'Turning complex problems into clean code.',
+        const row = document.createElement("div");
+        row.className =
+          "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1";
 
-            'From API design to production.',
+        const title = document.createElement("button");
+        title.type = "button";
+        title.className =
+          "text-left text-sm font-bold text-[#3d3d3d] hover:text-blue-700 hover:underline underline-offset-4 dark:text-gray-100 dark:hover:text-blue-300";
+        title.textContent = blog.title || "Untitled article";
+        title.addEventListener("click", () => openBlog(blog, true));
+        row.appendChild(title);
 
-            'Building beyond the happy path.',
-
-            'Making systems faster and more resilient.',
-
-            'Less complexity. Better engineering.',
-
-            'Good code. Solid systems. Real impact.'
-
-        ];
-
-        const typewriterElement = document.getElementById('typewriter-text');
-
-        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-
-
-        async function runTypewriter() {
-
-            let phraseIndex = 0;
-
-
-
-            while (true) {
-
-                const phrase = phrases[phraseIndex];
-
-
-
-                for (let i = 0; i < phrase.length; i++) {
-
-                    typewriterElement.textContent = phrase.substring(0, i + 1);
-
-                    await sleep(100);
-
-                }
-
-
-
-                await sleep(2000);
-
-
-
-                for (let i = phrase.length; i > 0; i--) {
-
-                    typewriterElement.textContent = phrase.substring(0, i - 1);
-
-                    await sleep(50);
-
-                }
-
-
-
-                await sleep(500);
-
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-
-            }
-
+        if (blog.date) {
+          addText(
+            row,
+            "span",
+            blog.date,
+            "text-xs text-gray-500 dark:text-gray-400"
+          );
         }
 
+        article.appendChild(row);
 
+        const tags = blog.tags || blog.category || "";
 
-        async function openSharedBlog() {
-            const requestedSlug = new URLSearchParams(window.location.search).get('blog');
-            if (!requestedSlug) return;
-
-            // URLSearchParams decodes the query value. Normalize both sides to
-            // tolerate punctuation, capitalization, and spacing differences.
-            const normalizeSlug = value => createBlogSlug(String(value || '').replace(/\\+/g, '-'));
-            const targetSlug = normalizeSlug(requestedSlug);
-
-            try {
-                // loadBlogs() has already populated loadedBlogs before this runs.
-                const blog = loadedBlogs.find(item =>
-                    normalizeSlug(item.slug || item.title) === targetSlug
-                );
-
-                if (blog) {
-                    // Render the article without adding a duplicate history entry.
-                    showBlogDetail(blog, false);
-                } else {
-                    console.error('Blog not found for URL slug:', targetSlug);
-                    showBlogsList(false);
-                }
-            } catch (error) {
-                console.error('Unable to open shared blog:', error);
-                showBlogsList(false);
-            }
+        if (tags) {
+          addText(
+            article,
+            "p",
+            Array.isArray(tags) ? tags.join(" / ") : tags,
+            "mt-1 text-xs text-gray-500 dark:text-gray-400"
+          );
         }
 
-        // Initialize even if this script runs after DOMContentLoaded.
-        async function initializePortfolio() {
-            loadProjects();
-            await loadExperience();
-            await loadBlogs();
-            await openSharedBlog();
-            runTypewriter();
+        if (blog.image) {
+          const image = document.createElement("img");
+          image.src = blog.image;
+          image.alt = blog.title || "Blog cover image";
+          image.loading = "lazy";
+          image.className = "mt-3 w-full rounded-lg object-cover";
+          image.onerror = () => image.remove();
+          article.appendChild(image);
         }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializePortfolio, { once: true });
-        } else {
-            initializePortfolio();
+        addText(
+          article,
+          "p",
+          makePreview(blogText(blog)),
+          "mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300"
+        );
+
+        const read = addText(
+          article,
+          "button",
+          "Read article →",
+          "mt-2 text-xs text-link hover:underline dark:text-blue-300"
+        );
+
+        read.type = "button";
+        read.addEventListener("click", () => openBlog(blog, true));
+
+        container.appendChild(article);
+      });
+    }
+
+    function showBlogDetail(blog) {
+      currentBlog = blog;
+
+      $("blog-detail-meta").textContent = [
+        blog.date,
+        blog.readTime || blog.readingTime
+      ]
+        .filter(Boolean)
+        .join(" · ");
+
+      $("blog-detail-title").textContent = blog.title || "Untitled article";
+
+      const tags = blog.tags || blog.category || "";
+      $("blog-detail-tags").textContent = Array.isArray(tags)
+        ? tags.join(" / ")
+        : tags;
+
+      $("blog-detail-description").textContent =
+        blog.description || blog.excerpt || "";
+
+      const content = $("blog-detail-content");
+      content.replaceChildren();
+
+      if (blog.image) {
+        const img = document.createElement("img");
+        img.src = blog.image;
+        img.alt = blog.title || "Blog cover image";
+        img.loading = "lazy";
+        img.className = "mb-6 w-full rounded-lg object-cover";
+        img.onerror = () => img.remove();
+        content.appendChild(img);
+      }
+
+      const body = document.createElement("div");
+      renderArticleContent(blogText(blog), body);
+      content.appendChild(body);
+
+      showOnlySection("writing");
+      $("blogs-container").hidden = true;
+      $("writing").querySelector("h2").hidden = true;
+      $("blog-detail-panel").hidden = false;
+    }
+
+    function openBlog(blog, updateUrl = true) {
+      showBlogDetail(blog);
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("blog", blogSlug(blog));
+        url.hash = "writing";
+
+        history.pushState({ blog: blogSlug(blog) }, "", url);
+      }
+    }
+
+    function showBlogList() {
+      currentBlog = null;
+      $("blog-detail-panel").hidden = true;
+      $("blogs-container").hidden = false;
+      $("writing").querySelector("h2").hidden = false;
+    }
+
+    function closeBlog(updateUrl = true) {
+      showBlogList();
+      showOnlySection("writing");
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete("blog");
+        url.hash = "writing";
+
+        history.pushState({ section: "writing" }, "", url);
+      }
+
+      $("share-status").textContent = "";
+    }
+
+    async function loadBlogs() {
+      const container = $("blogs-container");
+
+      try {
+        const response = await fetch("./blogs.json");
+        if (!response.ok) throw new Error("Could not load blogs.json");
+
+        const blogs = await response.json();
+        if (!Array.isArray(blogs)) {
+          throw new Error("blogs.json must contain an array");
         }
 
-    </script>
+        loadedBlogs = blogs;
+        renderBlogs();
+      } catch (error) {
+        console.error(error);
+        container.replaceChildren();
 
+        addText(
+          container,
+          "p",
+          "Unable to load blogs. Check blogs.json and serve the site over HTTP.",
+          "text-sm text-red-500 dark:text-red-400"
+        );
+      }
+    }
+
+    async function copyCurrentBlogUrl() {
+      if (!currentBlog) return;
+
+      const url = new URL(window.location.href);
+      url.searchParams.set("blog", blogSlug(currentBlog));
+      url.hash = "writing";
+
+      try {
+        await navigator.clipboard.writeText(url.toString());
+        $("share-status").textContent = "Blog URL copied.";
+      } catch (_) {
+        $("share-status").textContent = url.toString();
+      }
+    }
+
+    $("back-to-blogs").addEventListener("click", () => closeBlog(true));
+    $("share-blog").addEventListener("click", copyCurrentBlogUrl);
+    $("copy-blog-url").addEventListener("click", copyCurrentBlogUrl);
+
+    document.querySelectorAll("[data-section-link]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const sectionId = link.dataset.sectionLink;
+        if (!sectionIds.includes(sectionId)) return;
+
+        currentBlog = null;
+        showBlogList();
+        showOnlySection(sectionId);
+
+        const url = new URL(window.location.href);
+        url.hash = sectionId;
+        url.searchParams.delete("blog");
+
+        history.pushState({ section: sectionId }, "", url);
+      });
+    });
+
+    window.addEventListener("popstate", () => {
+      const requestedSlug = new URLSearchParams(
+        window.location.search
+      ).get("blog");
+
+      if (requestedSlug) {
+        const blog = loadedBlogs.find(
+          (item) => blogSlug(item) === requestedSlug
+        );
+
+        if (blog) {
+          showBlogDetail(blog);
+          return;
+        }
+      }
+
+      showBlogList();
+      showOnlySection(location.hash.slice(1) || "home");
+    });
+
+    $("year").textContent = new Date().getFullYear();
+
+    Promise.all([loadProjects(), loadBlogs()]).then(() => {
+      const requestedSlug = new URLSearchParams(
+        window.location.search
+      ).get("blog");
+
+      if (requestedSlug) {
+        const blog = loadedBlogs.find(
+          (item) => blogSlug(item) === requestedSlug
+        );
+
+        if (blog) {
+          showBlogDetail(blog);
+          return;
+        }
+      }
+
+      showOnlySection(location.hash.slice(1) || "home");
+    });
+  </script>
 </body>
 
 </html>
