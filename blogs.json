@@ -1,26 +1,18 @@
 [
   {
-    "slug": "philosophy-of-software-engineering",
-    "title": "The Philosophy of Software Engineering",
-    "date": "Oct 2026",
-    "category": "Software Engineering",
-    "tags": [
-      "Software Engineering",
-      "System Design",
-      "Clean Code"
-    ],
-    "readTime": "7 min read",
-    "description": "Principles that guide simplicity, maintainability, and better engineering decisions.",
-    "file": "./blog/philosophy-of-software-engineering.md"
-  },
-  {
-    "slug": "scalable-rest-apis",
-    "title": "Building Scalable REST APIs with Spring Boot",
+    "slug": "java-streams-api-interview-guide-1",
+    "title": "Java Streams API: A Practical Interview Guide - 1 ",
     "date": "Oct 2026",
     "category": "Java",
-    "tags": ["Java", "Spring Boot", "REST APIs"],
-    "readTime": "8 min read",
-    "description": "Practical techniques for designing reliable and maintainable REST APIs.",
-    "file": "./blog/scalable-rest-apis.md"
+    "tags": [
+      "Java",
+      "Streams API",
+      "Java 8",
+      "Functional Programming",
+      "Interview Preparation"
+    ],
+    "readTime": "10 min read",
+    "description": "Learn Java Streams API with practical examples of filter, map, reduce, sorting, distinct, Optional, and Collectors, along with common interview mistakes and practice questions.",
+    "file": "./blog/java-streams-api-interview-guide.md"
   }
 ]
