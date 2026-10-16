@@ -1,6 +1,7 @@
 <!doctype html>
-<html lang="en" class="dark">
-
+<!-- <html lang="en" class="dark">
+   -->
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -309,609 +310,650 @@
     </article>
   </main>
 
+  <!-- Markdown parser and HTML sanitizer -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
 
-  <script>
-    const $ = (id) => document.getElementById(id);
-    let loadedBlogs = [];
-    let currentBlog = null;
+<script>
+  const $ = (id) => document.getElementById(id);
 
-    function addText(parent, tag, value, className = "") {
-      const element = document.createElement(tag);
-      element.textContent = value == null ? "" : String(value);
-      if (className) element.className = className;
-      parent.appendChild(element);
-      return element;
+  let loadedBlogs = [];
+  let currentBlog = null;
+  let blogRequestId = 0;
+
+  // Cache fetched Markdown files to avoid downloading them repeatedly.
+  const blogContentCache = new Map();
+
+  function addText(parent, tag, value, className = "") {
+    const element = document.createElement(tag);
+    element.textContent = value == null ? "" : String(value);
+
+    if (className) element.className = className;
+
+    parent.appendChild(element);
+    return element;
+  }
+
+  function makeLink(label, href, className = "") {
+    const link = document.createElement("a");
+    link.textContent = label;
+    link.href = href || "#";
+    link.className = className;
+
+    if (/^https?:\/\//i.test(link.href)) {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
     }
 
-    function makeLink(label, href, className = "") {
-      const link = document.createElement("a");
-      link.textContent = label;
-      link.href = href || "#";
-      link.className = className;
+    return link;
+  }
 
-      if (/^https?:\/\//i.test(link.href)) {
+  function setTheme(theme) {
+    const dark = theme !== "light";
+
+    document.documentElement.classList.toggle("dark", dark);
+
+    try {
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    } catch (_) {}
+
+    $("theme-toggle").setAttribute(
+      "aria-label",
+      dark ? "Switch to light mode" : "Switch to dark mode"
+    );
+
+    $("theme-icon").textContent = dark ? "☼" : "☾";
+  }
+
+  $("theme-toggle").addEventListener("click", () => {
+    setTheme(
+      document.documentElement.classList.contains("dark")
+        ? "light"
+        : "dark"
+    );
+  });
+
+  setTheme(
+    document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light"
+  );
+
+  const sectionIds = ["home", "projects", "writing"];
+
+  function showOnlySection(sectionId) {
+    if (!sectionIds.includes(sectionId)) {
+      sectionId = "home";
+    }
+
+    sectionIds.forEach((id) => {
+      const section = $(id);
+
+      if (section) {
+        section.hidden = id !== sectionId;
+      }
+    });
+
+    if (sectionId !== "writing") {
+      $("blog-detail-panel").hidden = true;
+    } else if (!currentBlog) {
+      $("blogs-container").hidden = false;
+      $("blog-detail-panel").hidden = true;
+      $("writing").querySelector("h2").hidden = false;
+    }
+
+    document.querySelectorAll("[data-section-link]").forEach((link) => {
+      link.removeAttribute("aria-current");
+
+      if (link.dataset.sectionLink === sectionId) {
+        link.setAttribute("aria-current", "page");
+      }
+    });
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function blogSlug(blog) {
+    if (blog.slug) return String(blog.slug);
+
+    return String(blog.title || "post")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
+  // Fetch the Markdown article, using the cache when available.
+  async function fetchBlogContent(blog) {
+    const file = blog.file;
+
+    if (!file) {
+      throw new Error(
+        `No Markdown file configured for "${blog.title || blog.slug}".`
+      );
+    }
+
+    if (blogContentCache.has(file)) {
+      return blogContentCache.get(file);
+    }
+
+    const response = await fetch(file);
+
+    if (!response.ok) {
+      throw new Error(`Unable to load ${file} (${response.status}).`);
+    }
+
+    const markdown = await response.text();
+
+    blogContentCache.set(file, markdown);
+
+    return markdown;
+  }
+
+  // Render Markdown safely into the existing blog reader.
+  function renderArticleContent(markdown, container) {
+    container.replaceChildren();
+
+    container.className =
+      "space-y-4 leading-7 text-gray-700 dark:text-gray-300 " +
+      "[&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-bold " +
+      "[&_h3]:mt-6 [&_h3]:text-lg [&_h3]:font-bold " +
+      "[&_p]:my-4 [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-6 " +
+      "[&_ol]:my-4 [&_ol]:list-decimal [&_ol]:pl-6 " +
+      "[&_a]:text-blue-700 [&_a]:underline " +
+      "dark:[&_a]:text-blue-300 " +
+      "[&_img]:my-5 [&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-lg " +
+      "[&_pre]:my-5 [&_pre]:overflow-x-auto [&_pre]:rounded-lg " +
+      "[&_pre]:bg-gray-100 [&_pre]:p-4 dark:[&_pre]:bg-gray-900 " +
+      "[&_code]:font-mono [&_code]:text-sm " +
+      "[&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 " +
+      "[&_blockquote]:pl-4 [&_blockquote]:italic";
+
+    const html = marked.parse(String(markdown || ""), {
+      gfm: true,
+      breaks: false
+    });
+
+    // Sanitize generated HTML before inserting it into the page.
+    container.innerHTML = DOMPurify.sanitize(html, {
+      USE_PROFILES: { html: true }
+    });
+
+    // Open external links in a new tab safely.
+    container.querySelectorAll("a[href]").forEach((link) => {
+      const href = link.getAttribute("href") || "";
+
+      if (/^https?:\/\//i.test(href)) {
         link.target = "_blank";
         link.rel = "noopener noreferrer";
       }
-
-      return link;
-    }
-
-    function setTheme(theme) {
-      const dark = theme !== "light";
-      document.documentElement.classList.toggle("dark", dark);
-
-      try {
-        localStorage.setItem("theme", dark ? "dark" : "light");
-      } catch (_) { }
-
-      $("theme-toggle").setAttribute(
-        "aria-label",
-        dark ? "Switch to light mode" : "Switch to dark mode"
-      );
-      $("theme-icon").textContent = dark ? "☼" : "☾";
-    }
-
-    $("theme-toggle").addEventListener("click", () => {
-      setTheme(
-        document.documentElement.classList.contains("dark") ? "light" : "dark"
-      );
     });
 
-    setTheme(
-      document.documentElement.classList.contains("dark") ? "dark" : "light"
-    );
+    // Lazy-load article images.
+    container.querySelectorAll("img").forEach((img) => {
+      img.loading = "lazy";
+      img.classList.add("rounded-lg");
 
-    const sectionIds = ["home", "projects", "writing"];
+      img.onerror = () => {
+        img.remove();
+      };
+    });
 
-    function showOnlySection(sectionId) {
-      if (!sectionIds.includes(sectionId)) sectionId = "home";
+    if (!container.childElementCount) {
+      addText(container, "p", "The article content is empty.");
+    }
+  }
 
-      sectionIds.forEach((id) => {
-        const section = $(id);
-        if (section) section.hidden = id !== sectionId;
-      });
+  async function loadProjects() {
+    const container = $("projects-container");
 
-      if (sectionId !== "writing") {
-        $("blog-detail-panel").hidden = true;
-      } else if (!currentBlog) {
-        $("blogs-container").hidden = false;
-        $("blog-detail-panel").hidden = true;
-        $("writing").querySelector("h2").hidden = false;
+    try {
+      const response = await fetch("./projects.json");
+
+      if (!response.ok) {
+        throw new Error("Could not load projects.json");
       }
 
-      document.querySelectorAll("[data-section-link]").forEach((link) => {
-        link.removeAttribute("aria-current");
-        if (link.dataset.sectionLink === sectionId) {
-          link.setAttribute("aria-current", "page");
-        }
-      });
+      const projects = await response.json();
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function blogSlug(blog) {
-      if (blog.slug) return String(blog.slug);
-
-      return String(blog.title || "post")
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-|-$/g, "");
-    }
-
-    function blogText(blog) {
-      const value = blog.content || blog.body || blog.description || "";
-
-      if (Array.isArray(value)) {
-        return value
-          .map((item) =>
-            typeof item === "string" ? item : item.text || ""
-          )
-          .join("\n\n");
+      if (!Array.isArray(projects)) {
+        throw new Error("projects.json must contain an array");
       }
 
-      return String(value);
-    }
-
-    function makePreview(content, max = 210) {
-      const plain = String(content)
-        .replace(/```[\s\S]*?```/g, " code example ")
-        .replace(/!\[([^\]]*)\]\([^)]+\)/g, " image ")
-        .replace(/[#>*_`[\]()!-]/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-
-      return plain.length > max
-        ? plain.slice(0, max).trimEnd() + "…"
-        : plain || "Read the full article.";
-    }
-
-    function renderArticleContent(raw, container) {
       container.replaceChildren();
 
-      const lines = String(raw || "").replace(/\r\n/g, "\n").split("\n");
-      let paragraph = [];
-      let list = null;
-      let inCode = false;
-      let codeLines = [];
-
-      const flushParagraph = () => {
-        if (!paragraph.length) return;
-
-        addText(container, "p", paragraph.join(" ").trim());
-        paragraph = [];
-      };
-
-      const flushList = () => {
-        list = null;
-      };
-
-      const flushCode = () => {
-        const pre = document.createElement("pre");
-        const code = document.createElement("code");
-
-        code.textContent = codeLines.join("\n");
-        pre.appendChild(code);
-        container.appendChild(pre);
-
-        codeLines = [];
-        inCode = false;
-      };
-
-      const renderImage = (alt, src) => {
-        const figure = document.createElement("figure");
-        figure.className = "my-5";
-
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = alt;
-        img.loading = "lazy";
-        img.className = "w-full rounded-lg object-cover";
-        img.onerror = () => figure.remove();
-
-        figure.appendChild(img);
-
-        if (alt) {
-          addText(
-            figure,
-            "figcaption",
-            alt,
-            "mt-2 text-xs text-gray-500 dark:text-gray-400"
-          );
-        }
-
-        container.appendChild(figure);
-      };
-
-      for (const line of lines) {
-        if (line.trim().startsWith("```")) {
-          flushParagraph();
-          flushList();
-
-          if (inCode) {
-            flushCode();
-          } else {
-            inCode = true;
-          }
-
-          continue;
-        }
-
-        if (inCode) {
-          codeLines.push(line);
-          continue;
-        }
-
-        if (!line.trim()) {
-          flushParagraph();
-          flushList();
-          continue;
-        }
-
-        const imageMatch = line
-          .trim()
-          .match(/^!\[([^\]]*)\]\((https?:\/\/[^ )]+)\)$/);
-
-        if (imageMatch) {
-          flushParagraph();
-          flushList();
-          renderImage(imageMatch[1], imageMatch[2]);
-          continue;
-        }
-
-        const heading = line.match(/^(#{2,3})\s+(.+)$/);
-
-        if (heading) {
-          flushParagraph();
-          flushList();
-          addText(
-            container,
-            heading[1].length === 2 ? "h2" : "h3",
-            heading[2]
-          );
-          continue;
-        }
-
-        const item = line.match(/^\s*[-*]\s+(.+)$/);
-
-        if (item) {
-          flushParagraph();
-
-          if (!list) {
-            list = document.createElement("ul");
-            list.className = "list-disc pl-6 my-3";
-            container.appendChild(list);
-          }
-
-          addText(list, "li", item[1]);
-          continue;
-        }
-
-        flushList();
-        paragraph.push(line.trim());
-      }
-
-      flushParagraph();
-
-      if (inCode) flushCode();
-
-      if (!container.childElementCount) {
-        addText(container, "p", "The article content is empty.");
-      }
-    }
-
-    async function loadProjects() {
-      const container = $("projects-container");
-
-      try {
-        const response = await fetch("./projects.json");
-        if (!response.ok) throw new Error("Could not load projects.json");
-
-        const projects = await response.json();
-        if (!Array.isArray(projects)) {
-          throw new Error("projects.json must contain an array");
-        }
-
-        container.replaceChildren();
-
-        if (!projects.length) {
-          addText(
-            container,
-            "p",
-            "No projects added yet.",
-            "text-sm text-gray-500 dark:text-gray-400"
-          );
-          return;
-        }
-
-        projects.forEach((project) => {
-          const wrapper = document.createElement("article");
-          wrapper.className = "text-sm";
-
-          wrapper.appendChild(
-            makeLink(
-              project.title || "Untitled project",
-              project.link || "#",
-              "font-bold text-[#3d3d3d] hover:underline underline-offset-4 dark:text-gray-100"
-            )
-          );
-
-          if (project.date || project.year) {
-            addText(
-              wrapper,
-              "span",
-              " · " + (project.date || project.year),
-              "ml-2 text-xs text-gray-500 dark:text-gray-400"
-            );
-          }
-
-          const tags =
-            project.tags || project.techStack || project.technologies;
-
-          if (tags) {
-            addText(
-              wrapper,
-              "p",
-              Array.isArray(tags) ? tags.join(" · ") : tags,
-              "mt-1 text-xs text-gray-500 dark:text-gray-400"
-            );
-          }
-
-          const description =
-            project.snippet || project.description || project.summary;
-
-          if (description) {
-            addText(
-              wrapper,
-              "p",
-              description,
-              "mt-2 leading-6 text-gray-700 dark:text-gray-300"
-            );
-          }
-
-          container.appendChild(wrapper);
-        });
-      } catch (error) {
-        console.error(error);
-        container.replaceChildren();
-
+      if (!projects.length) {
         addText(
           container,
           "p",
-          "Unable to load projects. Check projects.json and serve the site over HTTP.",
-          "text-sm text-red-500 dark:text-red-400"
-        );
-      }
-    }
-
-    function renderBlogs() {
-      const container = $("blogs-container");
-      container.replaceChildren();
-
-      if (!loadedBlogs.length) {
-        addText(
-          container,
-          "p",
-          "No blog posts available yet.",
+          "No projects added yet.",
           "text-sm text-gray-500 dark:text-gray-400"
         );
         return;
       }
 
-      loadedBlogs.forEach((blog) => {
-        const article = document.createElement("article");
-        article.className =
-          "border-b border-[#d7dbe2] pb-5 last:border-0 dark:border-gray-700";
+      projects.forEach((project) => {
+        const wrapper = document.createElement("article");
+        wrapper.className = "text-sm";
 
-        const row = document.createElement("div");
-        row.className =
-          "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1";
+        wrapper.appendChild(
+          makeLink(
+            project.title || "Untitled project",
+            project.link || "#",
+            "font-bold text-[#3d3d3d] hover:underline " +
+            "underline-offset-4 dark:text-gray-100"
+          )
+        );
 
-        const title = document.createElement("button");
-        title.type = "button";
-        title.className =
-          "text-left text-sm font-bold text-[#3d3d3d] hover:text-blue-700 hover:underline underline-offset-4 dark:text-gray-100 dark:hover:text-blue-300";
-        title.textContent = blog.title || "Untitled article";
-        title.addEventListener("click", () => openBlog(blog, true));
-        row.appendChild(title);
-
-        if (blog.date) {
+        if (project.date || project.year) {
           addText(
-            row,
+            wrapper,
             "span",
-            blog.date,
-            "text-xs text-gray-500 dark:text-gray-400"
+            " · " + (project.date || project.year),
+            "ml-2 text-xs text-gray-500 dark:text-gray-400"
           );
         }
 
-        article.appendChild(row);
-
-        const tags = blog.tags || blog.category || "";
+        const tags =
+          project.tags ||
+          project.techStack ||
+          project.technologies;
 
         if (tags) {
           addText(
-            article,
+            wrapper,
             "p",
-            Array.isArray(tags) ? tags.join(" / ") : tags,
+            Array.isArray(tags) ? tags.join(" · ") : tags,
             "mt-1 text-xs text-gray-500 dark:text-gray-400"
           );
         }
 
-        if (blog.image) {
-          const image = document.createElement("img");
-          image.src = blog.image;
-          image.alt = blog.title || "Blog cover image";
-          image.loading = "lazy";
-          image.className = "mt-3 w-full rounded-lg object-cover";
-          image.onerror = () => image.remove();
-          article.appendChild(image);
+        const description =
+          project.snippet ||
+          project.description ||
+          project.summary;
+
+        if (description) {
+          addText(
+            wrapper,
+            "p",
+            description,
+            "mt-2 leading-6 text-gray-700 dark:text-gray-300"
+          );
         }
 
-        addText(
-          article,
-          "p",
-          makePreview(blogText(blog)),
-          "mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300"
-        );
-
-        const read = addText(
-          article,
-          "button",
-          "Read article →",
-          "mt-2 text-xs text-link hover:underline dark:text-blue-300"
-        );
-
-        read.type = "button";
-        read.addEventListener("click", () => openBlog(blog, true));
-
-        container.appendChild(article);
+        container.appendChild(wrapper);
       });
+    } catch (error) {
+      console.error(error);
+      container.replaceChildren();
+
+      addText(
+        container,
+        "p",
+        "Unable to load projects. Check projects.json and serve the site over HTTP.",
+        "text-sm text-red-500 dark:text-red-400"
+      );
+    }
+  }
+
+  function makePreview(content, max = 210) {
+    const plain = String(content || "")
+      .replace(/```[\s\S]*?```/g, " code example ")
+      .replace(/!\[([^\]]*)\]\([^)]+\)/g, " image ")
+      .replace(/[#>*_`[\]()!-]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    return plain.length > max
+      ? plain.slice(0, max).trimEnd() + "…"
+      : plain || "Read the full article.";
+  }
+
+  function renderBlogs() {
+    const container = $("blogs-container");
+    container.replaceChildren();
+
+    if (!loadedBlogs.length) {
+      addText(
+        container,
+        "p",
+        "No blog posts available yet.",
+        "text-sm text-gray-500 dark:text-gray-400"
+      );
+      return;
     }
 
-    function showBlogDetail(blog) {
-      currentBlog = blog;
+    loadedBlogs.forEach((blog) => {
+      const article = document.createElement("article");
 
-      $("blog-detail-meta").textContent = [
-        blog.date,
-        blog.readTime || blog.readingTime
-      ]
-        .filter(Boolean)
-        .join(" · ");
+      article.className =
+        "border-b border-[#d7dbe2] pb-5 last:border-0 " +
+        "dark:border-gray-700";
 
-      $("blog-detail-title").textContent = blog.title || "Untitled article";
+      const row = document.createElement("div");
+
+      row.className =
+        "flex flex-wrap items-baseline justify-between " +
+        "gap-x-4 gap-y-1";
+
+      const title = document.createElement("button");
+
+      title.type = "button";
+      title.className =
+        "text-left text-sm font-bold text-[#3d3d3d] " +
+        "hover:text-blue-700 hover:underline underline-offset-4 " +
+        "dark:text-gray-100 dark:hover:text-blue-300";
+
+      title.textContent = blog.title || "Untitled article";
+      title.addEventListener("click", () => openBlog(blog, true));
+
+      row.appendChild(title);
+
+      if (blog.date) {
+        addText(
+          row,
+          "span",
+          blog.date,
+          "text-xs text-gray-500 dark:text-gray-400"
+        );
+      }
+
+      article.appendChild(row);
 
       const tags = blog.tags || blog.category || "";
-      $("blog-detail-tags").textContent = Array.isArray(tags)
-        ? tags.join(" / ")
-        : tags;
 
-      $("blog-detail-description").textContent =
-        blog.description || blog.excerpt || "";
-
-      const content = $("blog-detail-content");
-      content.replaceChildren();
+      if (tags) {
+        addText(
+          article,
+          "p",
+          Array.isArray(tags) ? tags.join(" / ") : tags,
+          "mt-1 text-xs text-gray-500 dark:text-gray-400"
+        );
+      }
 
       if (blog.image) {
-        const img = document.createElement("img");
-        img.src = blog.image;
-        img.alt = blog.title || "Blog cover image";
-        img.loading = "lazy";
-        img.className = "mb-6 w-full rounded-lg object-cover";
-        img.onerror = () => img.remove();
-        content.appendChild(img);
+        const image = document.createElement("img");
+
+        image.src = blog.image;
+        image.alt = blog.title || "Blog cover image";
+        image.loading = "lazy";
+        image.className = "mt-3 w-full rounded-lg object-cover";
+        image.onerror = () => image.remove();
+
+        article.appendChild(image);
       }
 
-      const body = document.createElement("div");
-      renderArticleContent(blogText(blog), body);
-      content.appendChild(body);
+      addText(
+        article,
+        "p",
+        blog.description || blog.excerpt || "Read the full article.",
+        "mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300"
+      );
 
-      showOnlySection("writing");
-      $("blogs-container").hidden = true;
-      $("writing").querySelector("h2").hidden = true;
-      $("blog-detail-panel").hidden = false;
+      const read = addText(
+        article,
+        "button",
+        "Read article →",
+        "mt-2 text-xs text-link hover:underline dark:text-blue-300"
+      );
+
+      read.type = "button";
+      read.addEventListener("click", () => openBlog(blog, true));
+
+      container.appendChild(article);
+    });
+  }
+
+  async function showBlogDetail(blog) {
+    currentBlog = blog;
+
+    const requestId = ++blogRequestId;
+
+    $("blog-detail-meta").textContent = [
+      blog.date,
+      blog.readTime || blog.readingTime
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
+    $("blog-detail-title").textContent =
+      blog.title || "Untitled article";
+
+    const tags = blog.tags || blog.category || "";
+
+    $("blog-detail-tags").textContent = Array.isArray(tags)
+      ? tags.join(" / ")
+      : tags;
+
+    $("blog-detail-description").textContent =
+      blog.description || blog.excerpt || "";
+
+    const content = $("blog-detail-content");
+    content.replaceChildren();
+
+    if (blog.image) {
+      const img = document.createElement("img");
+
+      img.src = blog.image;
+      img.alt = blog.title || "Blog cover image";
+      img.loading = "lazy";
+      img.className = "mb-6 w-full rounded-lg object-cover";
+      img.onerror = () => img.remove();
+
+      content.appendChild(img);
     }
 
-    function openBlog(blog, updateUrl = true) {
-      showBlogDetail(blog);
+    const body = document.createElement("div");
 
-      if (updateUrl) {
-        const url = new URL(window.location.href);
-        url.searchParams.set("blog", blogSlug(blog));
-        url.hash = "writing";
+    addText(
+      body,
+      "p",
+      "Loading article...",
+      "text-sm text-gray-500 dark:text-gray-400"
+    );
 
-        history.pushState({ blog: blogSlug(blog) }, "", url);
+    content.appendChild(body);
+
+    showOnlySection("writing");
+    $("blogs-container").hidden = true;
+    $("writing").querySelector("h2").hidden = true;
+    $("blog-detail-panel").hidden = false;
+
+    try {
+      const markdown = await fetchBlogContent(blog);
+
+      // Prevent an older request from replacing a newer article.
+      if (requestId !== blogRequestId || currentBlog !== blog) {
+        return;
       }
-    }
 
-    function showBlogList() {
-      currentBlog = null;
-      $("blog-detail-panel").hidden = true;
-      $("blogs-container").hidden = false;
-      $("writing").querySelector("h2").hidden = false;
-    }
+      renderArticleContent(markdown, body);
+    } catch (error) {
+      console.error(error);
 
-    function closeBlog(updateUrl = true) {
-      showBlogList();
-      showOnlySection("writing");
-
-      if (updateUrl) {
-        const url = new URL(window.location.href);
-        url.searchParams.delete("blog");
-        url.hash = "writing";
-
-        history.pushState({ section: "writing" }, "", url);
+      if (requestId !== blogRequestId || currentBlog !== blog) {
+        return;
       }
 
-      $("share-status").textContent = "";
+      body.replaceChildren();
+
+      addText(
+        body,
+        "p",
+        "Unable to load this article. Check that its Markdown file exists and the file path in blogs.json is correct.",
+        "text-sm text-red-500 dark:text-red-400"
+      );
     }
+  }
 
-    async function loadBlogs() {
-      const container = $("blogs-container");
+  function openBlog(blog, updateUrl = true) {
+    showBlogDetail(blog);
 
-      try {
-        const response = await fetch("./blogs.json");
-        if (!response.ok) throw new Error("Could not load blogs.json");
-
-        const blogs = await response.json();
-        if (!Array.isArray(blogs)) {
-          throw new Error("blogs.json must contain an array");
-        }
-
-        loadedBlogs = blogs;
-        renderBlogs();
-      } catch (error) {
-        console.error(error);
-        container.replaceChildren();
-
-        addText(
-          container,
-          "p",
-          "Unable to load blogs. Check blogs.json and serve the site over HTTP.",
-          "text-sm text-red-500 dark:text-red-400"
-        );
-      }
-    }
-
-    async function copyCurrentBlogUrl() {
-      if (!currentBlog) return;
-
+    if (updateUrl) {
       const url = new URL(window.location.href);
-      url.searchParams.set("blog", blogSlug(currentBlog));
+
+      url.searchParams.set("blog", blogSlug(blog));
       url.hash = "writing";
 
-      try {
-        await navigator.clipboard.writeText(url.toString());
-        $("share-status").textContent = "Blog URL copied.";
-      } catch (_) {
-        $("share-status").textContent = url.toString();
+      history.pushState(
+        { blog: blogSlug(blog) },
+        "",
+        url
+      );
+    }
+  }
+
+  function showBlogList() {
+    currentBlog = null;
+    blogRequestId++;
+
+    $("blog-detail-panel").hidden = true;
+    $("blogs-container").hidden = false;
+    $("writing").querySelector("h2").hidden = false;
+  }
+
+  function closeBlog(updateUrl = true) {
+    showBlogList();
+    showOnlySection("writing");
+
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+
+      url.searchParams.delete("blog");
+      url.hash = "writing";
+
+      history.pushState(
+        { section: "writing" },
+        "",
+        url
+      );
+    }
+
+    $("share-status").textContent = "";
+  }
+
+  async function loadBlogs() {
+    const container = $("blogs-container");
+
+    try {
+      const response = await fetch("./blogs.json");
+
+      if (!response.ok) {
+        throw new Error("Could not load blogs.json");
+      }
+
+      const blogs = await response.json();
+
+      if (!Array.isArray(blogs)) {
+        throw new Error("blogs.json must contain an array");
+      }
+
+      loadedBlogs = blogs;
+      renderBlogs();
+    } catch (error) {
+      console.error(error);
+      container.replaceChildren();
+
+      addText(
+        container,
+        "p",
+        "Unable to load blogs. Check blogs.json and serve the site over HTTP.",
+        "text-sm text-red-500 dark:text-red-400"
+      );
+    }
+  }
+
+  async function copyCurrentBlogUrl() {
+    if (!currentBlog) return;
+
+    const url = new URL(window.location.href);
+
+    url.searchParams.set("blog", blogSlug(currentBlog));
+    url.hash = "writing";
+
+    try {
+      await navigator.clipboard.writeText(url.toString());
+
+      $("share-status").textContent = "Blog URL copied.";
+    } catch (_) {
+      $("share-status").textContent = url.toString();
+    }
+  }
+
+  $("back-to-blogs").addEventListener("click", () => {
+    closeBlog(true);
+  });
+
+  $("share-blog").addEventListener("click", copyCurrentBlogUrl);
+  $("copy-blog-url").addEventListener("click", copyCurrentBlogUrl);
+
+  document.querySelectorAll("[data-section-link]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const sectionId = link.dataset.sectionLink;
+
+      if (!sectionIds.includes(sectionId)) return;
+
+      showBlogList();
+      showOnlySection(sectionId);
+
+      const url = new URL(window.location.href);
+
+      url.hash = sectionId;
+      url.searchParams.delete("blog");
+
+      history.pushState(
+        { section: sectionId },
+        "",
+        url
+      );
+    });
+  });
+
+  window.addEventListener("popstate", () => {
+    const requestedSlug = new URLSearchParams(
+      window.location.search
+    ).get("blog");
+
+    if (requestedSlug) {
+      const blog = loadedBlogs.find(
+        (item) => blogSlug(item) === requestedSlug
+      );
+
+      if (blog) {
+        showBlogDetail(blog);
+        return;
       }
     }
 
-    $("back-to-blogs").addEventListener("click", () => closeBlog(true));
-    $("share-blog").addEventListener("click", copyCurrentBlogUrl);
-    $("copy-blog-url").addEventListener("click", copyCurrentBlogUrl);
+    showBlogList();
+    showOnlySection(location.hash.slice(1) || "home");
+  });
 
-    document.querySelectorAll("[data-section-link]").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
+  $("year").textContent = new Date().getFullYear();
 
-        const sectionId = link.dataset.sectionLink;
-        if (!sectionIds.includes(sectionId)) return;
+  Promise.all([loadProjects(), loadBlogs()]).then(() => {
+    const requestedSlug = new URLSearchParams(
+      window.location.search
+    ).get("blog");
 
-        currentBlog = null;
-        showBlogList();
-        showOnlySection(sectionId);
+    if (requestedSlug) {
+      const blog = loadedBlogs.find(
+        (item) => blogSlug(item) === requestedSlug
+      );
 
-        const url = new URL(window.location.href);
-        url.hash = sectionId;
-        url.searchParams.delete("blog");
-
-        history.pushState({ section: sectionId }, "", url);
-      });
-    });
-
-    window.addEventListener("popstate", () => {
-      const requestedSlug = new URLSearchParams(
-        window.location.search
-      ).get("blog");
-
-      if (requestedSlug) {
-        const blog = loadedBlogs.find(
-          (item) => blogSlug(item) === requestedSlug
-        );
-
-        if (blog) {
-          showBlogDetail(blog);
-          return;
-        }
+      if (blog) {
+        showBlogDetail(blog);
+        return;
       }
+    }
 
-      showBlogList();
-      showOnlySection(location.hash.slice(1) || "home");
-    });
+    showOnlySection(location.hash.slice(1) || "home");
+  });
+</script>
 
-    $("year").textContent = new Date().getFullYear();
-
-    Promise.all([loadProjects(), loadBlogs()]).then(() => {
-      const requestedSlug = new URLSearchParams(
-        window.location.search
-      ).get("blog");
-
-      if (requestedSlug) {
-        const blog = loadedBlogs.find(
-          (item) => blogSlug(item) === requestedSlug
-        );
-
-        if (blog) {
-          showBlogDetail(blog);
-          return;
-        }
-      }
-
-      showOnlySection(location.hash.slice(1) || "home");
-    });
-  </script>
 </body>
 
 </html>
