@@ -13,6 +13,6 @@
     ],
     "readTime": "10 min read",
     "description": "Learn Java Streams API with practical examples of filter, map, reduce, sorting, distinct, Optional, and Collectors, along with common interview mistakes and practice questions.",
-    "file": "./blog/java-streams-api-interview-guide.md"
+    "file": "./blog/java-streams-api-interview-guide-1.md"
   }
 ]
