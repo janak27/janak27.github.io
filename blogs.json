@@ -15,4 +15,20 @@
     "description": "Learn Java Streams API with practical examples of filter, map, reduce, sorting, distinct, Optional, and Collectors, along with common interview mistakes and practice questions.",
     "file": "./blog/java-streams-api-interview-guide-1.md"
   }
+  {
+    "slug": "java-streams-api-interview-guide-2",
+    "title": "Java Streams API: A Practical Interview Guide - 2 ",
+    "date": "Oct 2026",
+    "category": "Java",
+    "tags": [
+      "Java",
+      "Streams API",
+      "Java 8",
+      "Functional Programming",
+      "Interview Preparation"
+    ],
+    "readTime": "5 min read",
+    "description": "Learn Java Streams API with practical examples of filter, map, reduce, sorting, distinct, Optional, and Collectors, along with common interview mistakes and practice questions.",
+    "file": "./blog/java-streams-api-interview-guide-2.md"
+  }
 ]
