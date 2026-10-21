@@ -2,7 +2,7 @@
   {
     "slug": "java-streams-api-interview-guide-1",
     "title": "Java Streams API: A Practical Interview Guide - 1",
-    "date": "Oct 2026",
+    "date": "2026-10-14",
     "category": "Java",
     "tags": [
       "Java",
@@ -17,7 +17,7 @@
   {
     "slug": "java-streams-api-interview-guide-2",
     "title": "Java Streams API: Practical Interview Problems - 2",
-    "date": "Oct 2026",
+    "date": "2026-10-18",
     "category": "Java",
     "tags": [
       "Java",
@@ -28,5 +28,20 @@
     ],
     "readTime": "12 min read",
     "file": "./blog/java-streams-api-interview-guide-2.md"
-  }
+  },
+  {
+  "slug": "java-streams-api-interview-guide-",
+  "title": "Java Streams API: Practical Interview Problems - 3",
+  "date": "2026-10-21",
+  "category": "Java",
+  "tags": [
+    "Java",
+    "Streams API",
+    "Java 8",
+    "Functional Programming",
+    "Interview Preparation"
+  ],
+  "readTime": "12 min read",
+  "file": "./blog/java-streams-api-interview-guide-3.md"
+}
 ]
