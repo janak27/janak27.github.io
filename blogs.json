@@ -43,5 +43,19 @@
   ],
   "readTime": "12 min read",
   "file": "./blog/java-streams-api-interview-guide-3.md"
+},
+{
+  "slug": "java-streams-api-interview-guide-4",
+  "title": "Java Streams API: Practical Interview Problems - 4",
+  "date": "2026-10-23",
+  "category": "Java",
+  "tags": [
+    "Java",
+    "Streams API",
+    "Collectors",
+    "Java Interviews"
+  ],
+  "readTime": "12 min read",
+  "file": "./blog/java-streams-api-interview-guide-4.md"
 }
 ]
