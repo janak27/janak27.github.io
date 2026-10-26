@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "what-building-things-teaches-you",
+    "title": "What Building Things Teaches You",
+    "date": "2026-10-26",
+    "category": "Reflections",
+    "tags": [
+      "Learning",
+      "Software",
+      "Personal Growth"
+    ],
+    "readTime": "5 min read",
+    "file": "./writings/what-building-things-teaches-you.md",
+    "excerpt": "Lessons that become clear when you build things, make mistakes, and solve problems yourself."
+  }
+]

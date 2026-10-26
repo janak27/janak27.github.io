@@ -165,11 +165,13 @@
       <nav class="mb-6 flex items-center gap-0 overflow-x-auto border-b-2 border-[#d7dbe2] dark:border-gray-700"
         aria-label="Primary navigation">
         <a class="nav-link shrink-0 px-3 py-2 text-xs text-gray-500 dark:text-gray-400" href="#home"
-          data-section-link="home">Janak Avhad</a>
+          data-section-link="home">Me</a>
         <a class="nav-link shrink-0 px-3 py-2 text-xs text-gray-500 dark:text-gray-400" href="#projects"
           data-section-link="projects">Projects</a>
         <a class="nav-link shrink-0 px-3 py-2 text-xs text-gray-500 dark:text-gray-400" href="#writing"
           data-section-link="writing">Notes</a>
+        <a class="nav-link shrink-0 px-3 py-2 text-xs text-gray-500 dark:text-gray-400" href="#personal-writing"
+          data-section-link="personal-writing">Personal</a>
         <button id="theme-toggle" type="button"
           class="ml-auto shrink-0 px-3 py-2 text-xs text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white"
           aria-label="Switch to light mode" title="Toggle light/dark mode"><span id="theme-icon"
@@ -223,7 +225,7 @@
         <!-- Writing -->
         <section class="mt-7">
           <h2 class="mb-2 text-[18px] font-bold leading-tight">
-            Recent (Mostly notes and technical articles)
+            ( Notes and technical articles )
           </h2>
 
           <p class="mt-2">
@@ -318,6 +320,49 @@
         </article>
       </section>
 
+      <!-- Personal Writing -->
+      <section id="personal-writing" class="pt-6" hidden>
+        <h2 class="mb-3 text-[22px] font-bold leading-tight sm:text-[21px]">
+          Personal Writing
+        </h2>
+
+        <p class="mb-5 text-sm leading-6 text-gray-500 dark:text-gray-400">
+          Personal reflections, ideas, and things I learn along the way.
+        </p>
+
+        <div id="writings-container" class="space-y-5">
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            Loading personal writing...
+          </p>
+        </div>
+      </section>
+
+      <!-- Personal Writing Detail -->
+      <section id="writing-detail-panel" class="pt-6" hidden aria-labelledby="writing-detail-title">
+        <button id="back-to-writings" type="button"
+          class="mb-5 text-sm text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white">
+          ← Back to personal writing
+        </button>
+
+        <article>
+          <p id="writing-detail-meta" class="mb-3 text-xs text-gray-500 dark:text-gray-400"></p>
+
+          <h2 id="writing-detail-title" class="text-xl font-bold leading-snug"></h2>
+
+          <p id="writing-detail-tags" class="mt-3 text-xs text-gray-500 dark:text-gray-400"></p>
+
+          <div id="writing-detail-content" class="article-body mt-6 text-sm leading-7"></div>
+
+          <div class="mt-8 flex flex-wrap gap-4 border-t border-gray-200 pt-4 text-xs dark:border-gray-700">
+            <button id="share-writing" type="button" class="text-link hover:underline dark:text-blue-300">
+              Copy share link
+            </button>
+          </div>
+
+          <p id="writing-share-status" class="mt-2 text-xs text-gray-500 dark:text-gray-400" aria-live="polite"></p>
+        </article>
+      </section>
+
 
 
       <footer
@@ -337,6 +382,10 @@
     let loadedBlogs = [];
     let currentBlog = null;
     let blogRequestId = 0;
+
+    let loadedWritings = [];
+    let currentWriting = null;
+    let writingRequestId = 0;
 
     // Update this value when publishing changes to JSON or Markdown files.
     const ASSET_VERSION = "20261019-2";
@@ -407,7 +456,12 @@
         : "light"
     );
 
-    const sectionIds = ["home", "projects", "writing"];
+    const sectionIds = [
+      "home",
+      "projects",
+      "writing",
+      "personal-writing"
+    ];
 
     function showOnlySection(sectionId) {
       if (!sectionIds.includes(sectionId)) {
@@ -430,6 +484,14 @@
         $("writing").querySelector("h2").hidden = false;
       }
 
+      if (sectionId !== "personal-writing") {
+        $("writing-detail-panel").hidden = true;
+      } else if (!currentWriting) {
+        $("writings-container").hidden = false;
+        $("writing-detail-panel").hidden = true;
+        $("personal-writing").querySelector("h2").hidden = false;
+      }
+
       document.querySelectorAll("[data-section-link]").forEach((link) => {
         link.removeAttribute("aria-current");
 
@@ -440,7 +502,6 @@
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
     function blogSlug(blog) {
       if (blog.slug) return String(blog.slug);
 
@@ -871,6 +932,276 @@
       }
     }
 
+    function writingSlug(writing) {
+      if (writing.slug) return String(writing.slug);
+
+      return String(writing.title || "writing")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    function renderWritings() {
+      const container = $("writings-container");
+      container.replaceChildren();
+
+      if (!loadedWritings.length) {
+        addText(
+          container,
+          "p",
+          "No personal writing published yet.",
+          "text-sm text-gray-500 dark:text-gray-400"
+        );
+        return;
+      }
+
+      loadedWritings.forEach((writing) => {
+        const article = document.createElement("article");
+        article.className =
+          "border-b border-[#d7dbe2] pb-5 last:border-0 dark:border-gray-700";
+
+        const row = document.createElement("div");
+        row.className =
+          "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1";
+
+        const title = document.createElement("button");
+        title.type = "button";
+        title.className =
+          "text-left text-sm font-bold text-[#3d3d3d] " +
+          "hover:text-blue-700 hover:underline underline-offset-4 " +
+          "dark:text-gray-100 dark:hover:text-blue-300";
+        title.textContent = writing.title || "Untitled writing";
+        title.addEventListener("click", () => openWriting(writing, true));
+
+        row.appendChild(title);
+
+        if (writing.date) {
+          addText(
+            row,
+            "span",
+            writing.date,
+            "text-xs text-gray-500 dark:text-gray-400"
+          );
+        }
+
+        article.appendChild(row);
+
+        const metadata = [
+          writing.category,
+          ...(Array.isArray(writing.tags)
+            ? writing.tags
+            : writing.tags ? [writing.tags] : []),
+          writing.readTime
+        ].filter(Boolean);
+
+        if (metadata.length) {
+          addText(
+            article,
+            "p",
+            metadata.join(" / "),
+            "mt-1 text-xs text-gray-500 dark:text-gray-400"
+          );
+        }
+
+        if (writing.excerpt) {
+          addText(
+            article,
+            "p",
+            writing.excerpt,
+            "mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300"
+          );
+        }
+
+        const read = addText(
+          article,
+          "button",
+          "Read more →",
+          "mt-2 text-xs text-link hover:underline dark:text-blue-300"
+        );
+
+        read.type = "button";
+        read.addEventListener("click", () => openWriting(writing, true));
+
+        container.appendChild(article);
+      });
+    }
+
+    async function loadWritings() {
+      const container = $("writings-container");
+
+      try {
+        const response = await fetch(
+          versionedAssetUrl("./writings.json"),
+          { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Could not load writings.json (${response.status})`);
+        }
+
+        const writings = await response.json();
+
+        if (!Array.isArray(writings)) {
+          throw new Error("writings.json must contain an array");
+        }
+
+        loadedWritings = writings;
+        renderWritings();
+      } catch (error) {
+        console.error(error);
+        container.replaceChildren();
+
+        addText(
+          container,
+          "p",
+          "Unable to load personal writing. Check writings.json and its file paths.",
+          "text-sm text-red-500 dark:text-red-400"
+        );
+      }
+    }
+
+    async function showWritingDetail(writing) {
+      currentWriting = writing;
+      const requestId = ++writingRequestId;
+
+      $("writing-detail-meta").textContent = [
+        writing.date,
+        writing.readTime
+      ].filter(Boolean).join(" · ");
+
+      $("writing-detail-title").textContent =
+        writing.title || "Untitled writing";
+
+      const tags = [
+        writing.category,
+        ...(Array.isArray(writing.tags)
+          ? writing.tags
+          : writing.tags ? [writing.tags] : [])
+      ].filter(Boolean);
+
+      $("writing-detail-tags").textContent = tags.join(" / ");
+
+      const content = $("writing-detail-content");
+      content.replaceChildren();
+
+      const body = document.createElement("div");
+
+      addText(
+        body,
+        "p",
+        "Loading writing...",
+        "text-sm text-gray-500 dark:text-gray-400"
+      );
+
+      content.appendChild(body);
+
+      showOnlySection("personal-writing");
+      $("writings-container").hidden = true;
+      $("personal-writing").querySelector("h2").hidden = true;
+      $("writing-detail-panel").hidden = false;
+
+      try {
+        // Reuse the existing Markdown fetcher and cache.
+        const markdown = await fetchBlogContent(writing);
+
+        if (requestId !== writingRequestId || currentWriting !== writing) {
+          return;
+        }
+
+        // Reuse the existing Markdown renderer and HTML sanitizer.
+        renderArticleContent(markdown, body);
+      } catch (error) {
+        console.error(error);
+
+        if (requestId !== writingRequestId || currentWriting !== writing) {
+          return;
+        }
+
+        body.replaceChildren();
+
+        addText(
+          body,
+          "p",
+          "Unable to load this writing. Check that its Markdown file exists and its path in writings.json is correct.",
+          "text-sm text-red-500 dark:text-red-400"
+        );
+      }
+    }
+
+    function openWriting(writing, updateUrl = true) {
+      showWritingDetail(writing);
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+
+        url.searchParams.set("preview", "3");
+        url.searchParams.set("writing", writingSlug(writing));
+        url.searchParams.delete("blog");
+        url.hash = "personal-writing";
+
+        history.pushState(
+          { writing: writingSlug(writing) },
+          "",
+          url
+        );
+      }
+    }
+
+    function showWritingList() {
+      currentWriting = null;
+      writingRequestId++;
+
+      $("writing-detail-panel").hidden = true;
+      $("writings-container").hidden = false;
+      $("personal-writing").querySelector("h2").hidden = false;
+    }
+
+    function closeWriting(updateUrl = true) {
+      showWritingList();
+      showOnlySection("personal-writing");
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+
+        url.searchParams.set("preview", "3");
+        url.searchParams.delete("writing");
+        url.hash = "personal-writing";
+
+        history.pushState(
+          { section: "personal-writing" },
+          "",
+          url
+        );
+      }
+
+      $("writing-share-status").textContent = "";
+    }
+
+    async function copyCurrentWritingUrl() {
+      if (!currentWriting) return;
+
+      const url = new URL(window.location.href);
+
+      url.searchParams.set("preview", "3");
+      url.searchParams.set("writing", writingSlug(currentWriting));
+      url.searchParams.delete("blog");
+      url.hash = "personal-writing";
+
+      try {
+        await navigator.clipboard.writeText(url.toString());
+        $("writing-share-status").textContent = "Share link copied.";
+      } catch (_) {
+        $("writing-share-status").textContent = url.toString();
+      }
+    }
+
+    $("back-to-writings").addEventListener("click", () => {
+      closeWriting(true);
+    });
+
+    $("share-writing").addEventListener("click", copyCurrentWritingUrl);
+
     async function copyCurrentBlogUrl() {
       if (!currentBlog) return;
 
@@ -901,17 +1232,18 @@
         event.preventDefault();
 
         const sectionId = link.dataset.sectionLink;
-
         if (!sectionIds.includes(sectionId)) return;
 
         showBlogList();
+        showWritingList();
         showOnlySection(sectionId);
 
         const url = new URL(window.location.href);
 
         url.searchParams.set("preview", "3");
-        url.hash = sectionId;
         url.searchParams.delete("blog");
+        url.searchParams.delete("writing");
+        url.hash = sectionId;
 
         history.pushState(
           { section: sectionId },
@@ -922,35 +1254,53 @@
     });
 
     window.addEventListener("popstate", () => {
-      const requestedSlug = new URLSearchParams(
-        window.location.search
-      ).get("blog");
+      const params = new URLSearchParams(window.location.search);
+      const requestedBlog = params.get("blog");
+      const requestedWriting = params.get("writing");
 
-      if (requestedSlug) {
+      if (requestedBlog) {
         const blog = loadedBlogs.find(
-          (item) => blogSlug(item) === requestedSlug
+          (item) => blogSlug(item) === requestedBlog
         );
 
         if (blog) {
+          showWritingList();
           showBlogDetail(blog);
+          return;
+        }
+      }
+
+      if (requestedWriting) {
+        const writing = loadedWritings.find(
+          (item) => writingSlug(item) === requestedWriting
+        );
+
+        if (writing) {
+          showBlogList();
+          showWritingDetail(writing);
           return;
         }
       }
 
       showBlogList();
+      showWritingList();
       showOnlySection(location.hash.slice(1) || "home");
     });
 
     $("year").textContent = new Date().getFullYear();
 
-    Promise.all([loadProjects(), loadBlogs()]).then(() => {
-      const requestedSlug = new URLSearchParams(
-        window.location.search
-      ).get("blog");
+    Promise.all([
+      loadProjects(),
+      loadBlogs(),
+      loadWritings()
+    ]).then(() => {
+      const params = new URLSearchParams(window.location.search);
+      const requestedBlog = params.get("blog");
+      const requestedWriting = params.get("writing");
 
-      if (requestedSlug) {
+      if (requestedBlog) {
         const blog = loadedBlogs.find(
-          (item) => blogSlug(item) === requestedSlug
+          (item) => blogSlug(item) === requestedBlog
         );
 
         if (blog) {
@@ -959,8 +1309,20 @@
         }
       }
 
+      if (requestedWriting) {
+        const writing = loadedWritings.find(
+          (item) => writingSlug(item) === requestedWriting
+        );
+
+        if (writing) {
+          showWritingDetail(writing);
+          return;
+        }
+      }
+
       showOnlySection(location.hash.slice(1) || "home");
     });
+
   </script>
 
 </body>
