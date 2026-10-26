@@ -1,5 +1,4 @@
-# Java Streams API: Notes Part - 5 ( Flattening, Maps, Frequency Analysis and Custom Collectors )
-
+# Java Streams: flatMap, Frequency Analysis and Custom Collectors
 
 This post covers ten practical Java Streams problems from
 `Level05.java`, including nested collections, duplicate map keys,

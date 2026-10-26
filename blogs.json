@@ -1,8 +1,51 @@
+
 [
   {
-    "slug": "java-streams-api-interview-guide-1",
-    "title": "Java Streams API: A Practical Interview Guide - 1",
-    "date": "2026-10-14",
+    "slug": "java-streams-api-interview-guide-6",
+    "title": "Java Streams: Advanced Grouping, Aggregation and Parallel Processing",
+    "date": "2026-10-26",
+    "category": "Java",
+    "tags": [
+      "Java",
+      "Streams API",
+      "Collectors",
+      "Java Interviews"
+    ],
+    "readTime": "12 min read",
+    "file": "./blog/java-streams-api-interview-guide-6.md"
+  },
+  {
+    "slug": "java-streams-api-interview-guide-5",
+    "title": "Java Streams: flatMap, Frequency Analysis and Custom Collectors",
+    "date": "2026-10-25",
+    "category": "Java",
+    "tags": [
+      "Java",
+      "Streams API",
+      "Collectors",
+      "Java Interviews"
+    ],
+    "readTime": "12 min read",
+    "file": "./blog/java-streams-api-interview-guide-5.md"
+  },
+  {
+    "slug": "java-streams-api-interview-guide-4",
+    "title": "Java Streams: Grouping, Sorting and Top-N Problems",
+    "date": "2026-10-23",
+    "category": "Java",
+    "tags": [
+      "Java",
+      "Streams API",
+      "Collectors",
+      "Java Interviews"
+    ],
+    "readTime": "12 min read",
+    "file": "./blog/java-streams-api-interview-guide-4.md"
+  },
+  {
+    "slug": "java-streams-api-interview-guide-3",
+    "title": "Java Streams: Strings, Frequency Maps and Collectors",
+    "date": "2026-10-21",
     "category": "Java",
     "tags": [
       "Java",
@@ -11,12 +54,12 @@
       "Functional Programming",
       "Interview Preparation"
     ],
-    "readTime": "5 min read",
-    "file": "./blog/java-streams-api-interview-guide-1.md"
+    "readTime": "12 min read",
+    "file": "./blog/java-streams-api-interview-guide-3.md"
   },
   {
     "slug": "java-streams-api-interview-guide-2",
-    "title": "Java Streams API: Practical Interview Problems - 2",
+    "title": "Java Streams: Filtering, Mapping and Collecting Data",
     "date": "2026-10-18",
     "category": "Java",
     "tags": [
@@ -30,46 +73,18 @@
     "file": "./blog/java-streams-api-interview-guide-2.md"
   },
   {
-  "slug": "java-streams-api-interview-guide-",
-  "title": "Java Streams API: Practical Interview Problems - 3",
-  "date": "2026-10-21",
-  "category": "Java",
-  "tags": [
-    "Java",
-    "Streams API",
-    "Java 8",
-    "Functional Programming",
-    "Interview Preparation"
-  ],
-  "readTime": "12 min read",
-  "file": "./blog/java-streams-api-interview-guide-3.md"
-},
-{
-  "slug": "java-streams-api-interview-guide-4",
-  "title": "Java Streams API: Practical Interview Problems - 4",
-  "date": "2026-10-23",
-  "category": "Java",
-  "tags": [
-    "Java",
-    "Streams API",
-    "Collectors",
-    "Java Interviews"
-  ],
-  "readTime": "12 min read",
-  "file": "./blog/java-streams-api-interview-guide-4.md"
-},
-{
-  "slug": "java-streams-api-interview-guide-5",
-  "title": "Java Streams API: Practical Interview Problems - 5",
-  "date": "2026-10-25",
-  "category": "Java",
-  "tags": [
-    "Java",
-    "Streams API",
-    "Collectors",
-    "Java Interviews"
-  ],
-  "readTime": "12 min read",
-  "file": "./blog/java-streams-api-interview-guide-5.md"
-}
+    "slug": "java-streams-api-interview-guide-1",
+    "title": "Java Streams: Core Concepts and Essential Operations",
+    "date": "2026-10-14",
+    "category": "Java",
+    "tags": [
+      "Java",
+      "Streams API",
+      "Java 8",
+      "Functional Programming",
+      "Interview Preparation"
+    ],
+    "readTime": "5 min read",
+    "file": "./blog/java-streams-api-interview-guide-1.md"
+  }
 ]

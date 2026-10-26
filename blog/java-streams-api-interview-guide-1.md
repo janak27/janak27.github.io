@@ -1,4 +1,4 @@
-# Java Streams API : Notes Part - 1 (Basics)
+# Java Streams: Core Concepts and Essential Operations
 
 **Level:** Beginner to Interview Preparation  
 **Language:** Java 8+  

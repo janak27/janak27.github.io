@@ -1,32 +1,51 @@
+
 [
+  {
+    "title": "StreamAPIQuestions ",
+    "link": "https://github.com/janak27/StreamAPIquestions",
+    "tags": "Java • Streams API • Java 8 • Interview Preparation",
+    "description": "A collection of Java Streams API interview problems covering filtering, mapping, grouping, collectors, aggregation, and parallel processing."
+  },
   {
     "title": "Async Data Platform",
     "link": "https://github.com/janak27/async-data-platform",
     "tags": "Java • Spring Boot • Kafka • PostgreSQL • Redis • Docker",
-    "description": "Built an event-driven data processing platform using Spring Boot and Kafka to handle asynchronous workflows, with PostgreSQL for persistent storage, Redis for caching, and Docker for containerized development."
+    "description": "Built an event-driven data processing platform using Spring Boot, Kafka, PostgreSQL, Redis, and Docker."
+  },
+  {
+    "title": "FreskoPlay - Bidding JWT",
+    "link": "https://github.com/janak27/freskoplay-biddingjwt",
+    "tags": "Java • JWT • Authentication • Bidding",
+    "description": "A Java-based bidding application focused on JWT authentication and secure access."
+  },
+  {
+    "title": "WebserverJava",
+    "link": "https://github.com/janak27/WebserverJava",
+    "tags": "Java • Web Server",
+    "description": "A web server project implemented in Java."
   },
   {
     "title": "MedFlow - Healthcare Workflow & Patient Management Platform",
     "link": "https://github.com/janak27/MedFlow",
     "tags": "Java • Spring Boot • Angular • PostgreSQL • REST APIs • JWT",
-    "description": "Developed a healthcare management platform for streamlining patient registration, appointment scheduling, medical records management, and doctor-patient workflows. Built secure REST APIs with Spring Boot, integrated role-based authentication, and designed responsive Angular interfaces for efficient healthcare operations."
+    "description": "Developed a healthcare platform for patient registration, appointment scheduling, medical records, and secure doctor-patient workflows."
   },
   {
     "title": "PlaceIT - AI Powered Placement Management System",
     "link": "https://github.com/janak27/placeit",
     "tags": "TensorFlow • Scikit-learn • Django • React • TypeScript • IEEE Publication",
-    "description": "Developed an ML-based recommendation system for student-job matching using TensorFlow and Scikit-learn, integrated with Django and React for real-time placement recommendations."
+    "description": "Built an AI-powered placement platform using machine learning to recommend suitable jobs to students."
   },
   {
     "title": "InfraPulse - Infrastructure Monitoring & Network Diagnostics Platform",
     "link": "https://github.com/janak27/infrapulse",
     "tags": "Python • Flask • REST APIs • DNS • SSL Monitoring • Dashboard",
-    "description": "Built a real-time infrastructure monitoring dashboard that performs DNS, SSL, latency, and connectivity diagnostics while providing actionable operational insights through an interactive web interface."
+    "description": "Built an infrastructure monitoring dashboard for DNS, SSL, latency, and connectivity diagnostics."
   },
   {
     "title": "ShortSnips - DSA Revision & Code Snippet Platform",
     "link": "https://github.com/Short-Snips/Snips_contribution",
     "tags": "React • Django • Neo4j • GCP",
-    "description": "Contributed to a collaborative platform for organizing and revising Data Structures & Algorithms concepts through curated code snippets, leveraging Django APIs, React-based UI components, Neo4j graph database relationships, and cloud deployment on GCP."
+    "description": "Contributed to a DSA revision platform using React, Django APIs, Neo4j, and Google Cloud Platform."
   }
 ]

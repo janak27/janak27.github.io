@@ -1,4 +1,4 @@
-# Java Streams API: Notes Part - 3 (Practical Interview Problems)
+# Java Streams: Strings, Frequency Maps and Collectors
 
 **Level:** Beginner to Intermediate\
 **Language:** Java\
