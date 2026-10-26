@@ -1,4 +1,4 @@
-# Java Streams API: 10 Practical Interview Problems on Lists, Sets, Filtering, and Ranking
+# Java Streams API: Notes Part - 2  ( 10 Practical Interview Problems on Lists, Sets, Filtering, and Ranking )
 
 **Level:** Beginner to Intermediate\
 **Language:** Java\

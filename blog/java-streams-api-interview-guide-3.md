@@ -1,4 +1,4 @@
-# Java Streams API: Practical Interview Problems - 3
+# Java Streams API: Notes Part - 3 (Practical Interview Problems)
 
 **Level:** Beginner to Intermediate\
 **Language:** Java\

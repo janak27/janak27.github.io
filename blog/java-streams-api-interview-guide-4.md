@@ -1,4 +1,4 @@
-# Java Streams API: Employee Grouping and Salary Analysis - 4
+# Java Streams API: Notes Part - 4 ( Employee Grouping and Salary Analysis ) 
 
 **Level:** Intermediate\
 **Language:** Java\
